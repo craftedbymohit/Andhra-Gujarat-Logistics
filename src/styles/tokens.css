@@ -1,0 +1,96 @@
+/* ============================================================
+   Design tokens — the single source of truth for the brand.
+   Change a value here and it propagates across every page.
+   ============================================================ */
+
+:root {
+  /* ---- Brand colour ---- */
+  --sky: #0b99ee;
+  --ocean: #0f6cbd;
+  --ice: #ddf5ff;
+  --cta: #0078d7;
+
+  /* ---- Neutrals ---- */
+  --white: #ffffff;
+  --ink: #1a2b3c;
+  --grey: #707c87;
+  --line: rgba(26, 43, 60, 0.1);
+  --line-strong: rgba(26, 43, 60, 0.16);
+  --surface: #f7fbfe;
+  --surface-ice: #eaf8ff;
+
+  /* ---- Derived / alpha ---- */
+  --sky-08: rgba(11, 153, 238, 0.08);
+  --sky-14: rgba(11, 153, 238, 0.14);
+  --sky-30: rgba(11, 153, 238, 0.3);
+  --ink-60: rgba(26, 43, 60, 0.6);
+  --ink-72: rgba(26, 43, 60, 0.72);
+
+  /* ---- Gradients ---- */
+  --grad-light: linear-gradient(135deg, #ffffff, #eaf8ff, #ddf5ff);
+  --grad-brand: linear-gradient(135deg, var(--sky), var(--ocean));
+  --grad-deep: linear-gradient(140deg, #0a2540, #103a63 55%, #0f6cbd);
+
+  /* ---- Typography ---- */
+  --font-heading: 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-numeric: 'Space Grotesk', 'Manrope', system-ui, sans-serif;
+
+  /* Fluid type scale — clamps keep large typography readable on phones. */
+  --fs-display: clamp(2.75rem, 6.2vw, 5.25rem);
+  --fs-h1: clamp(2.25rem, 4.6vw, 3.75rem);
+  --fs-h2: clamp(1.85rem, 3.4vw, 2.85rem);
+  --fs-h3: clamp(1.35rem, 2vw, 1.75rem);
+  --fs-h4: clamp(1.1rem, 1.4vw, 1.25rem);
+  --fs-lead: clamp(1.02rem, 1.25vw, 1.2rem);
+  --fs-body: 1rem;
+  --fs-sm: 0.9rem;
+  --fs-xs: 0.78rem;
+
+  /* ---- Spacing / rhythm ---- */
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --max-width: 1280px;
+  --section-y: clamp(4.5rem, 9vw, 8.5rem);
+  --stack: clamp(1.75rem, 3.5vw, 3.25rem);
+
+  /* ---- Radius: restrained, never childish ---- */
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 14px;
+  --r-pill: 999px;
+
+  /* ---- Elevation ---- */
+  --shadow-sm: 0 1px 2px rgba(26, 43, 60, 0.05);
+  --shadow-md: 0 12px 32px -14px rgba(26, 43, 60, 0.18);
+  --shadow-lg: 0 30px 70px -30px rgba(15, 108, 189, 0.35);
+  --glow: 0 0 0 1px var(--sky-30), 0 18px 45px -18px rgba(11, 153, 238, 0.55);
+
+  /* ---- Motion ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 0.22s;
+  --dur: 0.42s;
+  --dur-slow: 0.8s;
+
+  /* ---- Layout chrome ---- */
+  --header-h: 76px;
+  --announce-h: 40px;
+}
+
+/* Respect users who ask the OS to reduce motion. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0.01ms;
+    --dur: 0.01ms;
+    --dur-slow: 0.01ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,2 @@
+# SPA fallback — without this, refreshing /branch-network returns a 404.
+/*  /index.html  200

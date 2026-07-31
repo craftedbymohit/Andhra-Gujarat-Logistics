@@ -1,0 +1,203 @@
+/* ============================================================
+   Layout primitives — the vocabulary every section is built from.
+   ============================================================ */
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.container--wide {
+  max-width: 1520px;
+}
+.container--narrow {
+  max-width: 860px;
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-y);
+}
+.section--tight {
+  padding-block: calc(var(--section-y) * 0.62);
+}
+.section--surface {
+  background: var(--surface);
+}
+.section--ice {
+  background: var(--grad-light);
+}
+.section--dark {
+  background: var(--grad-deep);
+  color: var(--white);
+}
+.section--dark h1,
+.section--dark h2,
+.section--dark h3,
+.section--dark h4 {
+  color: var(--white);
+}
+.section--dark p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* Hairline rule that reads as engineered rather than decorative. */
+.section--edge {
+  border-top: 1px solid var(--line);
+}
+
+/* ---- Grids ---- */
+.grid {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+.grid--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.grid--4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.grid--split {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .grid--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .grid--3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .grid--split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .grid--2,
+  .grid--3,
+  .grid--4 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* ---- Type helpers ---- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-heading);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ocean);
+}
+.eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--sky);
+}
+.section--dark .eyebrow {
+  color: var(--ice);
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.68;
+  color: var(--ink-72);
+  max-width: 62ch;
+}
+.section--dark .lead {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.numeric {
+  font-family: var(--font-numeric);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+
+.text-gradient {
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.muted {
+  color: var(--grey);
+}
+
+/* ---- Surfaces ---- */
+.panel {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Glass highlight used on the sticky header and floating chrome. */
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+}
+
+.hairline {
+  height: 1px;
+  background: var(--line);
+  border: 0;
+}
+
+/* Slow-drifting technical grid used behind hero and dark bands. */
+.grid-backdrop {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--sky-08) 1px, transparent 1px),
+    linear-gradient(90deg, var(--sky-08) 1px, transparent 1px);
+  background-size: 68px 68px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 40%, transparent 100%);
+  animation: grid-drift 32s linear infinite;
+  pointer-events: none;
+}
+.section--dark .grid-backdrop {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+}
+
+@keyframes grid-drift {
+  to {
+    background-position: 68px 68px;
+  }
+}
+
+/* Soft blue bloom behind key content. */
+.bloom {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.5;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(11, 153, 238, 0.45), transparent 70%);
+}
