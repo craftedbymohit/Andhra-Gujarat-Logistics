@@ -125,27 +125,3 @@ export const DIFFERENTIATORS = [
     text: 'Monthly performance packs covering on-time percentage, detention, damage and cost-per-tonne by lane.',
   },
 ];
-
-/** Technology stack section. */
-export const TECHNOLOGY = [
-  {
-    icon: 'satellite',
-    title: 'GPS Fleet Telematics',
-    text: 'Live position, halt duration and route-deviation alerts on every vehicle moving under an AGL LR.',
-  },
-  {
-    icon: 'monitor',
-    title: 'Central Control Tower',
-    text: 'A single operations desk monitoring every active consignment across all branches, 24 hours a day.',
-  },
-  {
-    icon: 'file',
-    title: 'Digital Documentation',
-    text: 'E-way bills, LRs and PODs generated and archived digitally, retrievable against any consignment reference.',
-  },
-  {
-    icon: 'bell',
-    title: 'Proactive Exception Alerts',
-    text: 'Delays, breakdowns and route deviations are escalated to the client before they become a production issue.',
-  },
-];

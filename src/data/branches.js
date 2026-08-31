@@ -10,7 +10,6 @@ export const BRANCHES = [
     city: 'Ahmedabad',
     state: 'Gujarat',
     region: 'Gujarat',
-    hq: true,
     lat: 23.0225,
     lng: 72.5714,
     manager: 'Rakesh Patel',
@@ -86,6 +85,7 @@ export const BRANCHES = [
     city: 'Ankleshwar',
     state: 'Gujarat',
     region: 'Gujarat',
+    hq: true,
     lat: 21.6266,
     lng: 73.0016,
     manager: 'Paresh Trivedi',
@@ -127,13 +127,12 @@ export const BRANCHES = [
     coverage: 'Jamnagar refinery belt and brass component cluster',
   },
 
-  // ---------------- Andhra Pradesh & Telangana ----------------
+  // ---------------- Telangana ----------------
   {
     id: 'hyderabad',
     city: 'Hyderabad',
     state: 'Telangana',
-    region: 'Andhra Pradesh',
-    hq: true,
+    region: 'Telangana',
     lat: 17.385,
     lng: 78.4867,
     manager: 'K. Srinivas Rao',
@@ -144,6 +143,7 @@ export const BRANCHES = [
     services: ['Road Freight', 'Pharma Logistics', 'Warehousing', 'Dedicated Fleet'],
     coverage: 'Telangana, north Andhra Pradesh and Deccan corridor',
   },
+  // ---------------- Andhra Pradesh ----------------
   {
     id: 'vijayawada',
     city: 'Vijayawada',
@@ -299,7 +299,7 @@ export const BRANCHES = [
 ];
 
 /** Region filters for the branch locator. */
-export const BRANCH_REGIONS = ['All', 'Gujarat', 'Andhra Pradesh', 'National'];
+export const BRANCH_REGIONS = ['All', 'Gujarat', 'Andhra Pradesh', 'Telangana', 'National'];
 
 /** Lanes drawn between hubs on the map — pairs of branch ids. */
 export const NETWORK_LANES = [

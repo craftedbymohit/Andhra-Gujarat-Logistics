@@ -16,7 +16,7 @@ export default function Footer() {
             <Logo light />
             <p className="footer__blurb">
               A regional transportation infrastructure company moving India&apos;s industrial output across
-              Gujarat, Andhra Pradesh and the national corridor — through a branch network built inside the
+              Gujarat, Andhra Pradesh, Telangana and the national corridor — through a branch network built inside the
               belts we serve.
             </p>
           </div>

@@ -1,5 +1,5 @@
 /**
- * Client voices and logos.
+ * Client voices.
  * Replace with attributed, client-approved quotes before launch.
  */
 
@@ -39,18 +39,4 @@ export const TESTIMONIALS = [
     role: 'Steel Processing Unit, Visakhapatnam',
     initials: 'SP',
   },
-];
-
-/** Client sectors shown in the logo marquee — swap for real client marks. */
-export const CLIENT_MARKS = [
-  'Speciality Chemicals',
-  'Bharat Steel Works',
-  'Vidya Pharma',
-  'Nova Polymers',
-  'Sanand Auto Parts',
-  'Krishna Textiles',
-  'Deccan Cement',
-  'Gujarat Engineering',
-  'Coastal Agro',
-  'Meridian FMCG',
 ];

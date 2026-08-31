@@ -1,51 +1,40 @@
 /** Fleet catalogue for the showcase carousel and the Road Freight page. */
 
+import flatbedImage from '../../assets/flatbed.jpg';
+import lcvImage from '../../assets/lcv.jpg';
+import multiAxleImage from '../../assets/multiaxel_32ft.avif';
+import sxlImage from '../../assets/sxl_truck.jpg';
+
 export const FLEET = [
   {
     id: 'container',
-    art: 'truck',
     name: '32 ft Multi-Axle Container',
-    use: 'Palletised and packed cargo on long-haul lanes.',
+    image: multiAxleImage,
+    use: 'Enclosed long-haul movement for packed and palletised cargo.',
     payload: '18–21 T',
     length: '32 ft',
   },
   {
     id: 'sxl',
-    art: 'truck',
     name: '32 ft Single-Axle (SXL)',
-    use: 'High-volume, low-density cargo such as textiles and packaging.',
+    image: sxlImage,
+    use: 'Flexible capacity for lighter, high-volume industrial loads.',
     payload: '7–9 T',
     length: '32 ft',
   },
   {
     id: 'trailer',
-    art: 'trailer',
     name: '40 ft Flat-Bed Trailer',
+    image: flatbedImage,
     use: 'Steel sections, machinery and containerised movement.',
     payload: '25–30 T',
     length: '40 ft',
   },
   {
-    id: 'lowbed',
-    art: 'lowbed',
-    name: 'Semi Low-Bed Trailer',
-    use: 'Tall and heavy machinery needing reduced deck height.',
-    payload: '40–60 T',
-    length: '45 ft',
-  },
-  {
-    id: 'hydraulic',
-    art: 'axle',
-    name: 'Hydraulic Modular Axle',
-    use: 'Over-dimensional and heavy-lift project consignments.',
-    payload: '100 T+',
-    length: 'Modular',
-  },
-  {
     id: 'lcv',
-    art: 'van',
     name: 'LCV & 19 ft Trucks',
-    use: 'City distribution, milk runs and last-mile industrial supply.',
+    image: lcvImage,
+    use: 'Agile distribution for short-haul and last-mile industrial supply.',
     payload: '3–7 T',
     length: '14–19 ft',
   },

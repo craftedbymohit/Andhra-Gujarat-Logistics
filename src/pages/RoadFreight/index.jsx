@@ -43,8 +43,8 @@ export default function RoadFreight() {
       <Section>
         <SectionHeading
           eyebrow="Vehicle Types"
-          title="From a three-tonne LCV to a hundred-tonne axle."
-          lead="Owned and contracted capacity across every standard configuration, so the consignment never has to be forced onto the wrong deck."
+          title="Four fleet formats. One operating standard."
+          lead="A focused fleet for containerised, open-deck and regional industrial movement."
         />
         <FleetShowcase />
       </Section>

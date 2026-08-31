@@ -5,22 +5,22 @@ import HomeHero from '@/components/hero/HomeHero';
 import { Section } from '@/components/shared/Section';
 import SectionHeading from '@/components/sections/SectionHeading';
 import StatsBand from '@/components/counters/StatsBand';
-import ServiceCard from '@/components/cards/ServiceCard';
-import FeatureCard from '@/components/cards/FeatureCard';
-import IndustryCard from '@/components/cards/IndustryCard';
 import ProcessTimeline from '@/components/timeline/ProcessTimeline';
 import FleetShowcase from '@/components/sections/FleetShowcase';
 import TestimonialSlider from '@/components/testimonials/TestimonialSlider';
 import BranchLocator from '@/components/maps/BranchLocator';
 import ClientLogos from '@/components/sections/ClientLogos';
 import CTABand from '@/components/sections/CTABand';
+import ExpertiseShowcase from '@/components/sections/ExpertiseShowcase';
+import WhyLogistics from '@/components/sections/WhyLogistics';
+import IndustryShowcase from '@/components/sections/IndustryShowcase';
 import Button from '@/components/buttons/Button';
 import Icon from '@/components/shared/Icon';
 import Reveal, { RevealGroup, revealItem } from '@/components/animations/Reveal';
 
 import usePageMeta from '@/hooks/usePageMeta';
 import { KPIS } from '@/constants/company';
-import { DIFFERENTIATORS, EXPERTISE, TECHNOLOGY } from '@/data/services';
+import { EXPERTISE } from '@/data/services';
 import { INDUSTRIES } from '@/data/industries';
 import { INSIGHTS } from '@/data/insights';
 import { BRANCHES } from '@/data/branches';
@@ -32,7 +32,7 @@ export default function Home() {
   );
 
   const gujarat = BRANCHES.filter((b) => b.region === 'Gujarat').length;
-  const andhra = BRANCHES.filter((b) => b.region === 'Andhra Pradesh').length;
+  const andhra = BRANCHES.filter((b) => ['Andhra Pradesh', 'Telangana'].includes(b.region)).length;
   const national = BRANCHES.filter((b) => b.region === 'National').length;
 
   return (
@@ -41,17 +41,18 @@ export default function Home() {
 
       {/* ---------- Branch presence + client marks ---------- */}
       <Section tight edge>
-        <div className="grid grid--split" style={{ alignItems: 'center', marginBottom: '3rem' }}>
+        <div className="grid grid--split" style={{ alignItems: 'start', marginBottom: '3rem' }}>
           <Reveal>
             <span className="eyebrow">Branch Presence</span>
             <h2 style={{ marginTop: '1rem', maxWidth: '18ch' }}>
-              Fifteen branches. Two industrial states. One operating standard.
+              Fifteen branches. Three industrial states. One operating standard.
             </h2>
           </Reveal>
-          <Reveal delay={0.1}>
+          <Reveal delay={0.1} className="branch-presence__support">
             <p className="lead">
-              Our branches sit inside the estates they serve — Ankleshwar, Vapi, Gajuwaka, Auto Nagar — not in
-              city-centre sales offices. That is why a vehicle reaches your gate in hours rather than a day.
+              Our network across Gujarat, Andhra Pradesh and Telangana is built around the industrial corridors we
+              serve — combining dependable capacity, responsive coordination and one consistent operating standard
+              from pickup to delivery.
             </p>
             <div className="row" style={{ gap: '2.5rem', marginTop: '1.75rem' }}>
               {[
@@ -70,7 +71,7 @@ export default function Home() {
           </Reveal>
         </div>
 
-        <Reveal>
+        <Reveal className="client-logo-block">
           <p
             className="eyebrow"
             style={{ justifyContent: 'center', width: '100%', marginBottom: '1.5rem' }}
@@ -82,11 +83,11 @@ export default function Home() {
       </Section>
 
       {/* ---------- Our expertise ---------- */}
-      <Section tone="surface">
+      <Section className="expertise-section">
         <SectionHeading
           eyebrow="Our Expertise"
-          title="Capability built around how industry actually moves."
-          lead="Four core services, each with its own planning discipline, vehicle mix and accountability structure — rather than one fleet stretched across every requirement."
+          title="Built for the way industry moves."
+          lead="Four focused capabilities. One accountable partner."
           aside={
             <Button to="/services" variant="ghost" size="sm">
               View all services
@@ -94,57 +95,42 @@ export default function Home() {
           }
         />
 
-        <RevealGroup className="grid grid--2">
-          {EXPERTISE.map((service, i) => (
-            <ServiceCard key={service.id} service={service} index={i} />
-          ))}
-        </RevealGroup>
+        <ExpertiseShowcase services={EXPERTISE} />
       </Section>
 
       {/* ---------- Operational excellence ---------- */}
-      <Section tone="dark">
-        <div className="grid-backdrop" />
-        <div style={{ position: 'relative', zIndex: 2 }}>
-          <SectionHeading
-            eyebrow="Operational Excellence"
-            title="Performance we publish, not performance we claim."
-            lead="Every number below is measured against actual proof-of-delivery timestamps and reported back to contract clients each month."
-          />
-          <StatsBand items={KPIS} dark />
-        </div>
+      <Section tone="surface" className="operational-section">
+        <SectionHeading
+          eyebrow="Operational Excellence"
+          title="Reliable by the numbers."
+          lead="A clear view of the standards our teams work to every day."
+        />
+        <StatsBand items={KPIS} className="stats-band--clean" />
       </Section>
 
       {/* ---------- Why Andhra Gujarat ---------- */}
-      <Section>
+      <Section tone="dark" className="why-logistics-section">
         <SectionHeading
-          eyebrow="Why Andhra Gujarat"
-          title="What a logistics partner is supposed to do."
-          lead="Trucks are a commodity. Planning, compliance, visibility and a name that answers the phone are not."
+          eyebrow="Why Andhra Gujarat Logistics"
+          title="The difference is in the details."
+          lead="Capacity is easy to promise. We make the rest visible."
         />
-        <RevealGroup className="grid grid--3">
-          {DIFFERENTIATORS.map((d) => (
-            <FeatureCard key={d.title} {...d} />
-          ))}
-        </RevealGroup>
+        <WhyLogistics />
       </Section>
 
       {/* ---------- Industries ---------- */}
-      <Section tone="ice">
+      <Section tone="ice" className="industry-section">
         <SectionHeading
           eyebrow="Industries Served"
-          title="Eight sectors. Eight sets of operating rules."
-          lead="A chemical drum, a steel coil and a pharma batch fail in completely different ways. We plan for the failure mode, not just the tonnage."
+          title="Sectors we know how to move."
+          lead="The cargo changes. The discipline stays."
           aside={
             <Button to="/industries" variant="ghost" size="sm">
               Explore industries
             </Button>
           }
         />
-        <RevealGroup className="grid grid--4">
-          {INDUSTRIES.slice(0, 8).map((industry) => (
-            <IndustryCard key={industry.id} industry={industry} />
-          ))}
-        </RevealGroup>
+        <IndustryShowcase industries={INDUSTRIES.slice(0, 8)} />
       </Section>
 
       {/* ---------- Logistics journey ---------- */}
@@ -161,8 +147,8 @@ export default function Home() {
       <Section tone="surface">
         <SectionHeading
           eyebrow="Fleet Highlights"
-          title="The right vehicle, not the available vehicle."
-          lead="Owned and contracted capacity spanning LCVs to hydraulic modular axles, so the consignment decides the equipment."
+          title="Capacity matched to the cargo."
+          lead="Four proven fleet formats for dependable movement across industrial lanes."
           aside={
             <Button to="/services/road-freight" variant="ghost" size="sm">
               Road freight details
@@ -172,36 +158,12 @@ export default function Home() {
         <FleetShowcase />
       </Section>
 
-      {/* ---------- Technology ---------- */}
-      <Section tone="dark">
-        <div className="grid-backdrop" />
-        <div className="grid grid--split" style={{ position: 'relative', zIndex: 2 }}>
-          <Reveal>
-            <span className="eyebrow">Technology</span>
-            <h2 style={{ marginTop: '1rem' }}>Visibility that reaches you before you ask for it.</h2>
-            <p className="lead" style={{ marginTop: '1.25rem' }}>
-              Technology in transport is only worth what it prevents. Ours exists to catch the delay, the
-              deviation and the documentation error while there is still time to act on them.
-            </p>
-            <Button variant="light" to="/about" style={{ marginTop: '2rem' }}>
-              How we operate
-            </Button>
-          </Reveal>
-
-          <RevealGroup className="grid grid--2">
-            {TECHNOLOGY.map((t) => (
-              <FeatureCard key={t.title} {...t} dark />
-            ))}
-          </RevealGroup>
-        </div>
-      </Section>
-
       {/* ---------- Testimonials ---------- */}
       <Section>
         <SectionHeading
           eyebrow="Client Voices"
-          title="Judged on the loads that went wrong, not the ones that went right."
-          lead="Every transporter looks the same on a clear day. These are clients who have seen how we handle an exception."
+          title="What partners say after the hard miles."
+          lead="The clearest measure of a logistics partner is the confidence left behind."
         />
         <TestimonialSlider />
       </Section>
@@ -210,8 +172,8 @@ export default function Home() {
       <Section tone="ice">
         <SectionHeading
           eyebrow="Coverage Map"
-          title="A network you can plan production around."
-          lead="Hover any node to see the branch manager, the industrial belt it serves and the corridors it feeds."
+          title="Ankleshwar at the centre of our network."
+          lead="Our head office connects Gujarat, Andhra Pradesh, Telangana and national hubs through one coordinated operating network."
           aside={
             <Button to="/branch-network" variant="ghost" size="sm">
               Full branch network

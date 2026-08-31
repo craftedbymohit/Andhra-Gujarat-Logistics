@@ -41,7 +41,7 @@ function BranchRow({ branch }) {
           </span>
           {branch.hq && (
             <span className="badge" style={{ marginLeft: '0.6rem', padding: '0.2rem 0.55rem' }}>
-              Regional HQ
+              Head Office
             </span>
           )}
           <span style={{ display: 'block', fontSize: '0.8rem', color: 'var(--grey)' }}>{branch.state}</span>
@@ -127,7 +127,7 @@ export default function BranchNetwork() {
   // Footer links deep-link into a specific branch via ?branch=<id>.
   const [params] = useSearchParams();
   const requested = params.get('branch');
-  const initialId = BRANCHES.some((b) => b.id === requested) ? requested : 'ahmedabad';
+  const initialId = BRANCHES.some((b) => b.id === requested) ? requested : 'ankleshwar';
 
   const grouped = useMemo(
     () =>

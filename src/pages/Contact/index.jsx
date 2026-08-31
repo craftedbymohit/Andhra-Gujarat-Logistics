@@ -193,7 +193,7 @@ export default function Contact() {
             <motion.div variants={revealItem} className="contact-card" key={b.id}>
               <span className="contact-card__label">
                 {b.state}
-                {b.hq && ' · Regional HQ'}
+                {b.hq && ' · Head Office'}
               </span>
               <span className="contact-card__value" style={{ cursor: 'default' }}>
                 {b.city}

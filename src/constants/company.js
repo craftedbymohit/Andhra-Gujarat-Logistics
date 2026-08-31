@@ -43,16 +43,9 @@ export const COMPANY = {
 /** Headline KPIs — reused on the hero, the stats band and interior pages. */
 export const KPIS = [
   { value: 98, suffix: '%', label: 'On-Time Deliveries', note: 'Measured across FY 2024–25 consignments' },
-  { value: 15, suffix: '+', label: 'Branch Locations', note: 'Gujarat, Andhra Pradesh & key national hubs' },
+  { value: 15, suffix: '+', label: 'Branch Locations', note: 'Gujarat, Andhra Pradesh, Telangana & national hubs' },
   { value: 500, suffix: '+', label: 'Industrial Clients', note: 'Chemical, steel, pharma, auto & FMCG' },
   { value: 24, suffix: '×7', label: 'Operations Support', note: 'Control tower with live consignment visibility' },
-];
-
-/** Compact proof points shown under the hero copy. */
-export const HERO_PROOF = [
-  { value: '2', suffix: ' States', label: 'Core operating base' },
-  { value: '1,200', suffix: '+', label: 'Monthly consignments' },
-  { value: '350', suffix: '+', label: 'Vehicles under network' },
 ];
 
 export const ANNOUNCEMENTS = [

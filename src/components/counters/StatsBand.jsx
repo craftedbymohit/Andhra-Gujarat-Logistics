@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useInView } from 'framer-motion';
 import CountUp from 'react-countup';
 import Reveal from '@/components/animations/Reveal';
+import { cn } from '@/utils/cn';
 
 /**
  * The Operational Excellence band.
@@ -10,12 +11,12 @@ import Reveal from '@/components/animations/Reveal';
  * that moment — react-countup's own scroll spy is bypassed so we are not
  * running a second, competing scroll listener alongside Lenis.
  */
-export default function StatsBand({ items, dark }) {
+export default function StatsBand({ items, dark, className }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-120px' });
 
   return (
-    <Reveal className="stats-band" ref={ref}>
+    <Reveal className={cn('stats-band', className)} ref={ref}>
       {items.map((item, i) => (
         <div className="stat" key={item.label}>
           <div className="stat__value">

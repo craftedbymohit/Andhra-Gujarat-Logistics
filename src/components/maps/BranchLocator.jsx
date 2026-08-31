@@ -6,7 +6,7 @@ import Button from '@/components/buttons/Button';
 import { BRANCHES, BRANCH_REGIONS } from '@/data/branches';
 
 /** Region tabs + map + expanding detail panel. Shared by Home and Branch Network. */
-export default function BranchLocator({ initialId = 'ahmedabad', showRegions = true }) {
+export default function BranchLocator({ initialId = 'ankleshwar', showRegions = true }) {
   const [region, setRegion] = useState('All');
   const [activeId, setActiveId] = useState(initialId);
 
@@ -47,17 +47,23 @@ export default function BranchLocator({ initialId = 'ahmedabad', showRegions = t
       <div className="map-layout">
         <div>
           <div className="map-stage">
-            <div className="grid-backdrop" />
             <IndiaMap branches={branches} activeId={active?.id} onSelect={setActiveId} />
           </div>
           <div className="map-legend">
             <span>
-              <i data-hq="true" /> Regional headquarters
+              <i data-hq="true" /> Head office
             </span>
             <span>
               <i /> Branch location
             </span>
-            <span>Hover or tap a node to view branch details</span>
+            <a
+              className="map-attribution"
+              href="https://commons.wikimedia.org/wiki/File:India_states_and_union_territories_map.svg"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Map outline: Wikimedia Commons · CC BY-SA 3.0
+            </a>
           </div>
         </div>
 
@@ -74,7 +80,7 @@ export default function BranchLocator({ initialId = 'ahmedabad', showRegions = t
           >
             <span className="branch-panel__state">
               {active.state}
-              {active.hq && ' · Regional HQ'}
+              {active.hq && ' · Head Office'}
             </span>
             <h3 className="branch-panel__city">{active.city}</h3>
 
