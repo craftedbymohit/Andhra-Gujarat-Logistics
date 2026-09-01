@@ -11,7 +11,7 @@ export const COMPANY = {
   shortName: 'AGL',
   legalName: 'Andhra Gujarat Logistics Pvt. Ltd.',
   tagline: 'Moving Industries. Not Just Cargo.',
-  established: 2009,
+  established: 2012,
 
   phone: '+91 98250 00000',
   phoneAlt: '+91 90990 00000',
@@ -43,7 +43,7 @@ export const COMPANY = {
 /** Headline KPIs — reused on the hero, the stats band and interior pages. */
 export const KPIS = [
   { value: 98, suffix: '%', label: 'On-Time Deliveries', note: 'Measured across FY 2024–25 consignments' },
-  { value: 15, suffix: '+', label: 'Branch Locations', note: 'Gujarat, Andhra Pradesh, Telangana & national hubs' },
+  { value: 9, suffix: '', label: 'Branch Locations', note: 'Gujarat, Andhra Pradesh, Telangana and Karnataka' },
   { value: 500, suffix: '+', label: 'Industrial Clients', note: 'Chemical, steel, pharma, auto & FMCG' },
   { value: 24, suffix: '×7', label: 'Operations Support', note: 'Control tower with live consignment visibility' },
 ];

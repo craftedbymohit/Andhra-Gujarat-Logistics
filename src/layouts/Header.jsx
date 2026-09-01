@@ -46,14 +46,25 @@ export default function Header() {
                       exit={{ opacity: 0, y: 8 }}
                       transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      {link.children.map((child) => (
-                        <Link key={child.to} to={child.to} className="nav__panel-link">
-                          <span className="nav__panel-icon">
-                            <Icon name={child.icon} size={17} />
+                      {link.children.map((child, index) => (
+                        <Link
+                          key={child.to}
+                          to={child.to}
+                          className="nav__panel-link"
+                          style={{ '--card-index': index }}
+                        >
+                          <span className="nav__panel-media">
+                            <img src={child.image} alt="" />
+                            <span className="nav__panel-icon">
+                              <Icon name={child.icon} size={17} />
+                            </span>
                           </span>
-                          <span>
+                          <span className="nav__panel-content">
                             <span className="nav__panel-title">{child.label}</span>
                             <span className="nav__panel-desc">{child.desc}</span>
+                            <span className="nav__panel-cta">
+                              Explore service <Icon name="arrowRight" size={14} />
+                            </span>
                           </span>
                         </Link>
                       ))}

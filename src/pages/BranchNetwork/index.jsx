@@ -11,7 +11,7 @@ import Icon from '@/components/shared/Icon';
 import Reveal, { revealItem } from '@/components/animations/Reveal';
 
 import usePageMeta from '@/hooks/usePageMeta';
-import { BRANCHES, BRANCH_REGIONS } from '@/data/branches';
+import { BRANCHES, BRANCH_REGIONS, getBranchPhones } from '@/data/branches';
 
 /** One expandable branch record in the directory below the map. */
 function BranchRow({ branch }) {
@@ -74,7 +74,15 @@ function BranchRow({ branch }) {
                 </div>
                 <div className="branch-panel__row">
                   <Icon name="phone" size={16} />
-                  <a href={`tel:${branch.phone.replace(/\s/g, '')}`}>{branch.phone}</a>
+                  <span>
+                    Mob.{' '}
+                    {getBranchPhones(branch).map((phone, index) => (
+                      <span key={phone}>
+                        {index > 0 && ' · '}
+                        <a href={`tel:${phone.replace(/\D/g, '')}`}>{phone}</a>
+                      </span>
+                    ))}
+                  </span>
                 </div>
                 <div className="branch-panel__row">
                   <Icon name="mail" size={16} />
@@ -94,11 +102,13 @@ function BranchRow({ branch }) {
                 </div>
               </div>
 
-              <div className="branch-panel__tags">
-                {branch.services.map((s) => (
-                  <span key={s}>{s}</span>
-                ))}
-              </div>
+              {branch.services.length > 0 && (
+                <div className="branch-panel__tags">
+                  {branch.services.map((s) => (
+                    <span key={s}>{s}</span>
+                  ))}
+                </div>
+              )}
 
               <a
                 href={mapsHref}
@@ -121,7 +131,7 @@ function BranchRow({ branch }) {
 export default function BranchNetwork() {
   usePageMeta(
     'Branch Network',
-    'Fifteen-plus branches across Gujarat, Andhra Pradesh, Telangana and national hubs — with managers, contact details and industrial coverage for each.'
+    'Nine locations across Gujarat, Telangana, Andhra Pradesh and Karnataka — with managers, contact details and industrial coverage for each.'
   );
 
   // Footer links deep-link into a specific branch via ?branch=<id>.

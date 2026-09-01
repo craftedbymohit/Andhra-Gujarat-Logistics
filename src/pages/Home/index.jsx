@@ -1,6 +1,3 @@
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-
 import HomeHero from '@/components/hero/HomeHero';
 import { Section } from '@/components/shared/Section';
 import SectionHeading from '@/components/sections/SectionHeading';
@@ -15,14 +12,12 @@ import ExpertiseShowcase from '@/components/sections/ExpertiseShowcase';
 import WhyLogistics from '@/components/sections/WhyLogistics';
 import IndustryShowcase from '@/components/sections/IndustryShowcase';
 import Button from '@/components/buttons/Button';
-import Icon from '@/components/shared/Icon';
-import Reveal, { RevealGroup, revealItem } from '@/components/animations/Reveal';
+import Reveal from '@/components/animations/Reveal';
 
 import usePageMeta from '@/hooks/usePageMeta';
 import { KPIS } from '@/constants/company';
 import { EXPERTISE } from '@/data/services';
 import { INDUSTRIES } from '@/data/industries';
-import { INSIGHTS } from '@/data/insights';
 import { BRANCHES } from '@/data/branches';
 
 export default function Home() {
@@ -33,7 +28,7 @@ export default function Home() {
 
   const gujarat = BRANCHES.filter((b) => b.region === 'Gujarat').length;
   const andhra = BRANCHES.filter((b) => ['Andhra Pradesh', 'Telangana'].includes(b.region)).length;
-  const national = BRANCHES.filter((b) => b.region === 'National').length;
+  const karnataka = BRANCHES.filter((b) => b.region === 'Karnataka').length;
 
   return (
     <>
@@ -45,12 +40,12 @@ export default function Home() {
           <Reveal>
             <span className="eyebrow">Branch Presence</span>
             <h2 style={{ marginTop: '1rem', maxWidth: '18ch' }}>
-              Fifteen branches. Three industrial states. One operating standard.
+              Nine locations. Four industrial states. One operating standard.
             </h2>
           </Reveal>
           <Reveal delay={0.1} className="branch-presence__support">
             <p className="lead">
-              Our network across Gujarat, Andhra Pradesh and Telangana is built around the industrial corridors we
+              Our network across Gujarat, Andhra Pradesh, Telangana and Karnataka is built around the industrial corridors we
               serve — combining dependable capacity, responsive coordination and one consistent operating standard
               from pickup to delivery.
             </p>
@@ -58,7 +53,7 @@ export default function Home() {
               {[
                 { value: gujarat, label: 'Gujarat branches' },
                 { value: andhra, label: 'Andhra & Telangana' },
-                { value: national, label: 'National hubs' },
+                { value: karnataka, label: 'Karnataka branch' },
               ].map((s) => (
                 <div key={s.label}>
                   <div className="numeric" style={{ fontSize: '1.9rem', fontWeight: 700, lineHeight: 1.1 }}>
@@ -163,50 +158,14 @@ export default function Home() {
         <SectionHeading
           eyebrow="Client Voices"
           title="What partners say after the hard miles."
-          lead="The clearest measure of a logistics partner is the confidence left behind."
         />
         <TestimonialSlider />
       </Section>
 
       {/* ---------- Coverage map ---------- */}
-      <Section tone="ice">
-        <SectionHeading
-          eyebrow="Coverage Map"
-          title="Ankleshwar at the centre of our network."
-          lead="Our head office connects Gujarat, Andhra Pradesh, Telangana and national hubs through one coordinated operating network."
-          aside={
-            <Button to="/branch-network" variant="ghost" size="sm">
-              Full branch network
-            </Button>
-          }
-        />
+      <Section tone="ice" className="coverage-map-section">
+        <SectionHeading eyebrow="Coverage Map" title="Ankleshwar at the centre of our network." />
         <BranchLocator />
-      </Section>
-
-      {/* ---------- Insights ---------- */}
-      <Section>
-        <SectionHeading
-          eyebrow="Latest Insights"
-          title="Notes from the corridor."
-          lead="Operating data and field observations from the lanes we run every day."
-        />
-        <RevealGroup className="grid grid--3">
-          {INSIGHTS.map((post) => (
-            <motion.article variants={revealItem} className="insight" key={post.title}>
-              <div className="insight__meta">
-                <span>{post.category}</span>
-                <span>·</span>
-                <span>{post.date}</span>
-              </div>
-              <h3 className="insight__title">{post.title}</h3>
-              <p className="card__text">{post.excerpt}</p>
-              <Link to={post.href} className="link-arrow" style={{ marginTop: 'auto' }}>
-                Read insight
-                <Icon name="arrowRight" size={15} />
-              </Link>
-            </motion.article>
-          ))}
-        </RevealGroup>
       </Section>
 
       <CTABand />

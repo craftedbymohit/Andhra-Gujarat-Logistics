@@ -23,7 +23,7 @@ export default function HomeHero() {
       <div className="container hero__content">
         <span className="badge badge--light">
           <span className="dot-live" />
-          Gujarat&nbsp; · &nbsp;Andhra Pradesh&nbsp; · &nbsp;Telangana&nbsp; · &nbsp;Pan-India lanes
+          Gujarat&nbsp; · &nbsp;Andhra Pradesh&nbsp; · &nbsp;Telangana&nbsp; · &nbsp;Karnataka&nbsp; · &nbsp;Pan-India lanes
         </span>
 
         <h1 className="hero__title">
@@ -38,8 +38,8 @@ export default function HomeHero() {
           <Button size="lg" onClick={openQuote}>
             Request a Quote
           </Button>
-          <Button size="lg" variant="outline-light" to="/services" icon="arrowRight">
-            Explore Services
+          <Button size="lg" variant="outline-light" to="/contact" icon="arrowRight">
+            Contact Us
           </Button>
         </div>
       </div>

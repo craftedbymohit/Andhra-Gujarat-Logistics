@@ -4,11 +4,9 @@ import PageHero from '@/components/hero/PageHero';
 import { Section } from '@/components/shared/Section';
 import SectionHeading from '@/components/sections/SectionHeading';
 import FeatureCard from '@/components/cards/FeatureCard';
-import SpecRows from '@/components/sections/SpecRows';
 import CompanyTimeline from '@/components/timeline/CompanyTimeline';
 import StatsBand from '@/components/counters/StatsBand';
 import CTABand from '@/components/sections/CTABand';
-import Button from '@/components/buttons/Button';
 import Icon from '@/components/shared/Icon';
 import Reveal, { RevealGroup, revealItem } from '@/components/animations/Reveal';
 
@@ -16,13 +14,9 @@ import usePageMeta from '@/hooks/usePageMeta';
 import { COMPANY, KPIS } from '@/constants/company';
 import {
   CHAIRMAN,
-  CORE_VALUES,
   CSR,
-  GALLERY,
   LEADERSHIP,
   MISSION,
-  SAFETY_PRACTICES,
-  STANDARDS,
   VISION,
 } from '@/data/company';
 import { BRANCHES } from '@/data/branches';
@@ -30,7 +24,7 @@ import { BRANCHES } from '@/data/branches';
 export default function About() {
   usePageMeta(
     'About Us',
-    'The story, leadership, values and operating standards behind Andhra Gujarat Logistics — a two-state transportation network built since 2009.'
+    'The story, leadership and operating standards behind Andhra Gujarat Logistics — a four-state transportation network built since 2012.'
   );
 
   return (
@@ -38,42 +32,41 @@ export default function About() {
       <PageHero
         crumbs={[{ label: 'About Us' }]}
         eyebrow="About Andhra Gujarat Logistics"
-        title="Built branch by branch, since 2009."
-        lead="We are a transportation infrastructure company operating out of Gujarat and Andhra Pradesh — assembled slowly, in the industrial estates our clients actually manufacture in."
+        title="Built around the corridors industry depends on."
+        lead="Andhra Gujarat Logistic began in 2012 in Ankleshwar and Hyderabad by Bajranglal Sharma & Kamlesh Sharma."
         meta={[
           { value: `${new Date().getFullYear() - COMPANY.established}+`, label: 'Years operating' },
           { value: BRANCHES.length, label: 'Branch locations' },
-          { value: '350+', label: 'Vehicles in network' },
-          { value: '500+', label: 'Industrial clients' },
+          { value: '4', label: 'States connected' },
+          { value: '24×7', label: 'Operations support' },
         ]}
       />
 
       {/* ---------- Our story ---------- */}
-      <Section>
-        <div className="grid grid--split">
-          <Reveal>
+      <Section tone="ice" className="story-section">
+        <div className="story-grid">
+          <Reveal className="story-intro">
             <span className="eyebrow">Our Story</span>
-            <h2 style={{ marginTop: '1rem' }}>
-              We did not set out to own trucks. We set out to make a delivery date mean something.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1} className="stack">
+            <h2>Two cities. One promise.</h2>
             <p className="lead">
-              Andhra Gujarat Logistics began in {COMPANY.established} with a handful of vehicles working the
-              Aslali and Naroda estates outside Ahmedabad. The proposition was narrow and unglamorous: pick up
-              when we said we would, and deliver when we said we would.
+              A logistics company built where industry works — close to the gates, the people and the pressure of
+              every delivery date.
+            </p>
+          </Reveal>
+          <Reveal delay={0.1} className="story-copy">
+            <p className="story-copy__lead">
+              Andhra Gujarat Logistic began in 2012 in Ankleshwar and Hyderabad by Bajranglal Sharma & Kamlesh
+              Sharma.
             </p>
             <p>
-              Manufacturers noticed. Within three years we had opened at Vadodara and Ankleshwar because clients
-              in the Nandesari and Bharuch chemical belts wanted the same discipline closer to their gates. In
-              2015 we crossed into Andhra Pradesh and Telangana, and the Gujarat ⇄ Andhra corridor became the
-              spine of the business.
+              From those two industrial centres, the network has grown to nine locations across Gujarat, Andhra
+              Pradesh, Telangana and Karnataka — with one operating standard carried through every consignment.
             </p>
-            <p>
-              Today the network runs to {BRANCHES.length} branches, a project cargo division with its own survey
-              team, and a control tower that watches every consignment on the road. The proposition has not
-              changed — there is simply a great deal more infrastructure behind it.
-            </p>
+            <div className="story-tags" aria-label="Story principles">
+              <span>Built close to industry</span>
+              <span>One accountable team</span>
+              <span>Ready for the next lane</span>
+            </div>
           </Reveal>
         </div>
       </Section>
@@ -123,26 +116,12 @@ export default function About() {
         </div>
       </Section>
 
-      {/* ---------- Core values ---------- */}
-      <Section tone="ice">
-        <SectionHeading
-          eyebrow="Core Values"
-          title="Six things we will not trade away for a load."
-          lead="These are operating rules, not wall posters. Every branch is audited against them."
-        />
-        <RevealGroup className="grid grid--3">
-          {CORE_VALUES.map((v) => (
-            <FeatureCard key={v.title} {...v} />
-          ))}
-        </RevealGroup>
-      </Section>
-
       {/* ---------- Timeline ---------- */}
       <Section>
         <SectionHeading
+          className="timeline-heading"
           eyebrow="Company Timeline"
-          title="Fifteen years, one branch at a time."
-          lead="Each opening followed a client requirement rather than a growth target."
+          title="Built with purpose, one branch at a time."
         />
         <CompanyTimeline />
       </Section>
@@ -185,75 +164,17 @@ export default function About() {
         </RevealGroup>
       </Section>
 
-      {/* ---------- Safety ---------- */}
-      <Section tone="surface">
-        <div className="split-sticky">
-          <div className="sticky-col">
-            <span className="eyebrow">Safety Culture</span>
-            <h2 style={{ marginTop: '1rem' }}>A schedule is never a reason to cut a corner.</h2>
-            <p className="lead" style={{ marginTop: '1.25rem' }}>
-              Every driver in our network has the authority to refuse an unsafe load or an unsafe schedule
-              without needing to justify it afterwards.
-            </p>
-            <Button to="/contact" variant="ghost" style={{ marginTop: '2rem' }}>
-              Discuss your safety requirements
-            </Button>
-          </div>
-          <SpecRows items={SAFETY_PRACTICES} />
-        </div>
-      </Section>
-
-      {/* ---------- Standards ---------- */}
-      <Section>
-        <SectionHeading
-          eyebrow="Quality Standards"
-          title="Compliance is a precondition, not a selling point."
-          lead="Documentation and statutory compliance are verified before a vehicle is allocated — not reconciled after a consignment is detained."
-        />
-        <RevealGroup className="grid grid--3">
-          {STANDARDS.map((s) => (
-            <motion.div variants={revealItem} className="card" key={s.label}>
-              <span className="card__icon">
-                <Icon name="check" size={20} />
-              </span>
-              <h3 className="card__title" style={{ fontSize: '1.05rem' }}>
-                {s.label}
-              </h3>
-              <p className="card__text">{s.note}</p>
-            </motion.div>
-          ))}
-        </RevealGroup>
-      </Section>
-
       {/* ---------- CSR ---------- */}
       <Section tone="ice">
         <SectionHeading
           eyebrow="Corporate Social Responsibility"
-          title="The people who drive this business come first."
-          lead="Road transport is a hard living. Our obligations start with the drivers who carry the cargo."
+          title="A stronger road starts with a stronger team."
         />
         <RevealGroup className="grid grid--3">
           {CSR.map((c) => (
             <FeatureCard key={c.title} {...c} />
           ))}
         </RevealGroup>
-      </Section>
-
-      {/* ---------- Gallery ---------- */}
-      <Section>
-        <SectionHeading
-          eyebrow="Gallery"
-          title="Operations, on the ground."
-          lead="Replace these placeholders with site photography from your branches and executions."
-        />
-        <Reveal className="gallery">
-          {GALLERY.map((g) => (
-            <div className="gallery__tile" key={g.caption}>
-              <Icon name={g.icon} size={34} strokeWidth={1.3} />
-              <span className="gallery__caption">{g.caption}</span>
-            </div>
-          ))}
-        </Reveal>
       </Section>
 
       <CTABand

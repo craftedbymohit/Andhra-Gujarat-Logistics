@@ -5,7 +5,7 @@ import { TESTIMONIALS } from '@/data/testimonials';
 
 const AUTOPLAY_MS = 7000;
 
-/** Quote-led voice wall with a selectable editorial testimonial. */
+/** Quote-led client voice carousel with a compact speaker index. */
 export default function TestimonialSlider({ items = TESTIMONIALS }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -26,34 +26,22 @@ export default function TestimonialSlider({ items = TESTIMONIALS }) {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="voices__directory">
-        <span className="eyebrow">Voices from the work</span>
-        <p className="voices__note">The moments clients remember are the ones that tested the operation.</p>
-        <div className="voices__list" role="list" aria-label="Client voices">
-          {items.map((t, i) => (
-            <button
-              className="voices__selector"
-              data-active={i === index}
-              key={t.quote}
-              type="button"
-              onClick={() => setIndex(i)}
-              aria-label={`Show voice from ${t.role}`}
-            >
-              <span className="voices__selector-number numeric">{String(i + 1).padStart(2, '0')}</span>
-              <span className="voices__selector-copy">
-                <strong>{t.name}</strong>
-                <small>{t.role}</small>
-              </span>
-              <Icon name="arrowRight" size={16} />
-            </button>
-          ))}
+      <div className="voices__intro">
+        <span className="eyebrow">Client voices</span>
+        <h3 className="voices__intro-title">Proof from the teams on the ground.</h3>
+        <p className="voices__note">
+          Anonymised feedback from the people who plan, dispatch and close consignments every day.
+        </p>
+        <div className="voices__intro-foot">
+          <span className="voices__live-dot" aria-hidden="true" />
+          <span>Field notes from active operations</span>
         </div>
       </div>
 
       <div className="voices__feature">
         <div className="voices__feature-topline">
-          <span className="numeric">CLIENT VOICE / {String(index + 1).padStart(2, '0')}</span>
-          <span className="voices__feature-status">On the record</span>
+          <span className="numeric">FIELD NOTE / {String(index + 1).padStart(2, '0')}</span>
+          <span className="voices__feature-status">Partner feedback</span>
         </div>
         <AnimatePresence mode="popLayout">
           <motion.blockquote
@@ -78,9 +66,22 @@ export default function TestimonialSlider({ items = TESTIMONIALS }) {
           </motion.blockquote>
         </AnimatePresence>
         <div className="voices__controls">
-          <div className="voices__progress" aria-hidden="true">
+          <div className="voices__people" role="list" aria-label="Client voices">
             {items.map((t, i) => (
-              <span key={t.quote} data-active={i === index} />
+              <button
+                className="voices__person"
+                data-active={i === index}
+                key={t.quote}
+                type="button"
+                onClick={() => setIndex(i)}
+                aria-label={`Show voice from ${t.role}`}
+              >
+                <span className="voices__person-avatar">{t.initials}</span>
+                <span className="voices__person-copy">
+                  <strong>{t.name}</strong>
+                  <small>{t.role}</small>
+                </span>
+              </button>
             ))}
           </div>
           <div className="slider-nav">

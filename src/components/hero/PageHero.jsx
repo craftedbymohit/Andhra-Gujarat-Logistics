@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Icon from '@/components/shared/Icon';
+import { cn } from '@/utils/cn';
 
 /** Dark banner used at the top of every interior page. */
-export default function PageHero({ eyebrow, title, lead, crumbs = [], meta = [], children }) {
+export default function PageHero({ eyebrow, title, lead, crumbs = [], meta = [], children, art, className }) {
   return (
-    <section className="page-hero">
+    <section className={cn('page-hero', className)}>
       <div className="grid-backdrop" />
       <div className="bloom page-hero__bloom" />
 
@@ -31,6 +32,7 @@ export default function PageHero({ eyebrow, title, lead, crumbs = [], meta = [],
         </motion.nav>
 
         <motion.div
+          className="page-hero__copy"
           initial={{ opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
@@ -44,6 +46,17 @@ export default function PageHero({ eyebrow, title, lead, crumbs = [], meta = [],
           {lead && <p className="lead">{lead}</p>}
           {children}
         </motion.div>
+
+        {art && (
+          <motion.div
+            className="page-hero__art"
+            initial={{ opacity: 0, x: 24, scale: 0.97 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {art}
+          </motion.div>
+        )}
 
         {meta.length > 0 && (
           <motion.div

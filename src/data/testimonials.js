@@ -27,13 +27,6 @@ export const TESTIMONIALS = [
   },
   {
     quote:
-      'Documentation is where most transporters lose us — e-way bills, PODs, GST. With AGL the paperwork closes with the consignment. Our audit cycle got noticeably shorter.',
-    name: 'Finance Controller',
-    role: 'Pharmaceutical Formulations, Hyderabad',
-    initials: 'PF',
-  },
-  {
-    quote:
       'Dedicated fleet on the Gandhidham–Vizag lane meant we stopped bidding for capacity every week. Predictable cost, predictable placement.',
     name: 'Head of Operations',
     role: 'Steel Processing Unit, Visakhapatnam',

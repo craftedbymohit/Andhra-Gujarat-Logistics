@@ -1,22 +1,29 @@
 /** Route table used by the header, mobile menu and footer. */
 
+import roadFreightImage from '../../assets/road_freight.jpg';
+import projectCargoImage from '../../assets/project_cargo.jpg';
+import customizedSolutionsImage from '../../assets/customized_logistic_solution.jpg';
+
 export const SERVICE_LINKS = [
   {
     label: 'Road Freight',
     to: '/services/road-freight',
     icon: 'truck',
+    image: roadFreightImage,
     desc: 'FTL & PTL movement across national corridors',
   },
   {
     label: 'Project Cargo',
     to: '/services/project-cargo',
     icon: 'crane',
+    image: projectCargoImage,
     desc: 'ODC, heavy-lift and factory relocation',
   },
   {
     label: 'Customized Solutions',
     to: '/services/customized-solutions',
     icon: 'layers',
+    image: customizedSolutionsImage,
     desc: 'Industry-engineered logistics programmes',
   },
 ];

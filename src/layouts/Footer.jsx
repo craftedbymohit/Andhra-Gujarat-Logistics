@@ -16,7 +16,7 @@ export default function Footer() {
             <Logo light />
             <p className="footer__blurb">
               A regional transportation infrastructure company moving India&apos;s industrial output across
-              Gujarat, Andhra Pradesh, Telangana and the national corridor — through a branch network built inside the
+              Gujarat, Andhra Pradesh, Telangana, Karnataka and the national corridor — through a branch network built inside the
               belts we serve.
             </p>
           </div>
@@ -71,6 +71,12 @@ export default function Footer() {
         <div className="footer__bottom">
           <span>
             © {year} {COMPANY.legalName}. All rights reserved.
+          </span>
+          <span className="footer__credit">
+            Designed with love by{' '}
+            <a href="https://aayvimotechnologies.com" target="_blank" rel="noreferrer">
+              aayvimotechnologies.com
+            </a>
           </span>
           <div className="footer__socials">
             {COMPANY.socials.map((s) => (

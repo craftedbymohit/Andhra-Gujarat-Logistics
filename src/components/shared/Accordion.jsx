@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Icon from '@/components/shared/Icon';
+import { cn } from '@/utils/cn';
 
 /** FAQ accordion. One panel open at a time; click an open panel to close it. */
-export default function Accordion({ items, defaultOpen = 0 }) {
+export default function Accordion({ items, defaultOpen = 0, className }) {
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <div className="accordion">
+    <div className={cn('accordion', className)}>
       {items.map((item, i) => {
         const isOpen = open === i;
         return (
@@ -17,7 +18,10 @@ export default function Accordion({ items, defaultOpen = 0 }) {
               onClick={() => setOpen(isOpen ? -1 : i)}
               aria-expanded={isOpen}
             >
-              <span>{item.q}</span>
+              <span className="accordion__question">
+                <span className="accordion__number numeric">{String(i + 1).padStart(2, '0')}</span>
+                <span>{item.q}</span>
+              </span>
               <span className="accordion__sign">
                 <Icon name="plus" size={15} />
               </span>

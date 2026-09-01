@@ -6,7 +6,7 @@ const PILLARS = [
   {
     icon: 'network',
     title: 'Regional depth',
-    text: 'A connected operating network across Gujarat, Andhra Pradesh and Telangana.',
+    text: 'A connected operating network across Gujarat, Andhra Pradesh, Telangana and Karnataka.',
   },
   {
     icon: 'users',

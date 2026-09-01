@@ -67,6 +67,78 @@
 }
 
 /* ---------------- About ---------------- */
+.story-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(1.25rem, 4vw, 4rem);
+  align-items: stretch;
+}
+.story-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.25rem, 3vw, 2.5rem) 0;
+}
+.story-intro h2 {
+  max-width: 11ch;
+  margin-top: 1.1rem;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+.story-intro .lead {
+  max-width: 32ch;
+  margin-top: 1.35rem;
+}
+.story-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+.story-copy__lead {
+  max-width: 30ch;
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2.1vw, 1.65rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+.story-copy > p + p {
+  max-width: 52ch;
+  margin-top: 1.15rem;
+  color: var(--ink-72);
+  line-height: 1.7;
+}
+.story-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.75rem;
+}
+.story-tags span {
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--sky-14);
+  border-radius: var(--r-pill);
+  background: var(--sky-08);
+  color: var(--ocean);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+@media (max-width: 820px) {
+  .story-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .story-intro {
+    padding-block: 0;
+  }
+}
+
 .chairman {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
@@ -152,46 +224,6 @@
   font-size: var(--fs-sm);
   line-height: 1.65;
   color: var(--ink-72);
-}
-
-/* Gallery — CSS-only abstract tiles, swap in photography later. */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.75rem;
-}
-@media (max-width: 900px) {
-  .gallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-.gallery__tile {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  border-radius: var(--r-md);
-  background: var(--grad-light);
-  border: 1px solid var(--line);
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  color: var(--sky);
-}
-.gallery__tile:nth-child(4n + 1) {
-  grid-column: span 2;
-  aspect-ratio: 8 / 3;
-}
-@media (max-width: 900px) {
-  .gallery__tile:nth-child(4n + 1) {
-    grid-column: span 2;
-  }
-}
-.gallery__caption {
-  position: absolute;
-  left: 0.9rem;
-  bottom: 0.75rem;
-  font-size: var(--fs-xs);
-  font-weight: 600;
-  color: var(--ocean);
 }
 
 /* ---------------- Industries ---------------- */

@@ -50,7 +50,7 @@ export default function Contact() {
     'Reach the Andhra Gujarat Logistics operations desk, sales team, control tower or any of our regional branch offices.'
   );
 
-  const regional = BRANCHES.filter((b) => b.hq || ['vadodara', 'surat', 'visakhapatnam', 'vijayawada', 'gandhidham'].includes(b.id));
+  const regional = BRANCHES;
 
   // Google Maps embed centred on the corporate office. No API key required.
   const mapQuery = encodeURIComponent(COMPANY.hq.lines.join(', '));
@@ -208,7 +208,15 @@ export default function Contact() {
                 </div>
                 <div className="branch-panel__row">
                   <Icon name="phone" size={15} />
-                  <a href={`tel:${b.phone.replace(/\s/g, '')}`}>{b.phone}</a>
+                  <span>
+                    Mob.{' '}
+                    {(b.phones ?? [b.phone]).map((phone, index) => (
+                      <span key={phone}>
+                        {index > 0 && ' · '}
+                        <a href={`tel:${phone.replace(/\D/g, '')}`}>{phone}</a>
+                      </span>
+                    ))}
+                  </span>
                 </div>
                 <div className="branch-panel__row">
                   <Icon name="mail" size={15} />

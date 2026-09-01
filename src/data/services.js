@@ -91,37 +91,3 @@ export const PROCESS_STEPS = [
     text: 'Signed POD digitised and attached to the consignment record, closing the loop for billing and audit.',
   },
 ];
-
-/** Why-choose-us pillars. */
-export const DIFFERENTIATORS = [
-  {
-    icon: 'network',
-    title: 'Two-State Operating Depth',
-    text: 'Branches sitting inside the industrial belts they serve — Ankleshwar, Vapi, Gajuwaka, Auto Nagar — not sales offices in city centres.',
-  },
-  {
-    icon: 'clock',
-    title: 'Transit Commitments That Hold',
-    text: 'Lane-level transit norms published to the client and measured against actual POD timestamps, not estimated at the time of booking.',
-  },
-  {
-    icon: 'shield',
-    title: 'Compliance as Standard',
-    text: 'Valid permits, fitness, insurance and driver documentation verified before a vehicle is allocated to any consignment.',
-  },
-  {
-    icon: 'monitor',
-    title: 'Visibility Without Chasing',
-    text: 'A control tower that pushes status to you. Clients should not have to telephone a branch to learn where their cargo is.',
-  },
-  {
-    icon: 'users',
-    title: 'One Accountable Owner',
-    text: 'Every contract client is assigned a named operations owner who carries the consignment end to end.',
-  },
-  {
-    icon: 'chart',
-    title: 'Reporting You Can Act On',
-    text: 'Monthly performance packs covering on-time percentage, detention, damage and cost-per-tonne by lane.',
-  },
-];
