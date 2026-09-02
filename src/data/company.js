@@ -1,4 +1,4 @@
-/** About-page content: mission, vision, milestones, leadership and CSR. */
+/** About-page content: mission, vision, milestones, director message and CSR. */
 
 export const MISSION =
   'To move India’s industrial output with the reliability of infrastructure — building a branch network, a professional workforce and an operating discipline that manufacturers can plan their production around.';
@@ -40,45 +40,23 @@ export const MILESTONES = [
   },
 ];
 
-export const LEADERSHIP = [
-  {
-    name: 'Mahesh Patel',
-    role: 'Chairman & Managing Director',
-    bio: 'Leads the company with a focus on dependable movement, accountable teams and long-term client relationships.',
-  },
-  {
-    name: 'K. Srinivas Rao',
-    role: 'Director — South Operations',
-    bio: 'Leads the Andhra Pradesh and Telangana network, with deep experience in pharma and port-linked movement.',
-  },
-  {
-    name: 'Nilesh Mehta',
-    role: 'Head — Project Cargo',
-    bio: 'Route surveys, heavy-lift planning and permissions across nine states. Twenty years of ODC execution.',
-  },
-  {
-    name: 'Rakesh Patel',
-    role: 'Head — Fleet & Maintenance',
-    bio: 'Owns vehicle availability, preventive maintenance cycles and driver training across all branches.',
-  },
-  {
-    name: 'Anita Shah',
-    role: 'Head — Finance & Compliance',
-    bio: 'Statutory compliance, GST and e-way bill governance, and client billing accuracy across the network.',
-  },
-  {
-    name: 'M. Ravi Kumar',
-    role: 'Head — Control Tower',
-    bio: 'Runs the 24×7 operations desk, exception escalation and client performance reporting.',
-  },
-];
-
 export const CHAIRMAN = {
-  name: 'Mahesh Patel',
-  role: 'Chairman & Managing Director',
-  initials: 'MP',
-  quote: 'We began with a simple promise: when we commit to a delivery, we stand behind it. As the network has grown, that promise has become a responsibility we carry into every lane.',
-  note: 'Our branches, drivers and operating teams exist to make that responsibility visible in every consignment we carry.',
+  people: [
+    {
+      name: 'Bajrang Lal Sharma',
+      role: 'Chairman',
+      initials: 'BLS',
+      image: null,
+    },
+    {
+      name: 'Kamlesh Sharma',
+      role: 'Managing Director',
+      initials: 'KS',
+      image: null,
+    },
+  ],
+  quote: 'A reliable logistics partner is built on trust, discipline and the courage to stand behind every commitment. We carry that responsibility into every lane, every branch and every consignment.',
+  note: 'Together, we are building Andhra Gujarat Logistic as a dependable partner for India’s industrial movement — grounded in people, safety and service.',
 };
 
 export const CSR = [

@@ -5,8 +5,6 @@ import { Section } from '@/components/shared/Section';
 import SectionHeading from '@/components/sections/SectionHeading';
 import FleetShowcase from '@/components/sections/FleetShowcase';
 import FeatureCard from '@/components/cards/FeatureCard';
-import SpecRows from '@/components/sections/SpecRows';
-import Accordion from '@/components/shared/Accordion';
 import CTABand from '@/components/sections/CTABand';
 import Button from '@/components/buttons/Button';
 import Icon from '@/components/shared/Icon';
@@ -16,7 +14,6 @@ import usePageMeta from '@/hooks/usePageMeta';
 import { LANES } from '@/data/fleet';
 import { INDUSTRIES } from '@/data/industries';
 import { ROAD_FREIGHT } from '@/data/serviceDetails';
-import { ROAD_FREIGHT_FAQS } from '@/data/faqs';
 
 export default function RoadFreight() {
   usePageMeta(
@@ -53,53 +50,93 @@ export default function RoadFreight() {
       <Section tone="surface">
         <SectionHeading
           eyebrow="Core Routes"
-          title="Published transit norms, measured against POD."
-          lead="These are the lanes we run daily. Transit ranges reflect actual performance, including statutory halts — not a best-case calculation."
+          title="The lanes that keep industry moving."
+          lead="A live view of the corridors our teams know by road, checkpoint and delivery window — with transit norms built from real operating performance."
         />
 
-        <Reveal className="spec-rows">
-          {LANES.map((lane, i) => (
-            <div
-              className="spec-row"
-              key={`${lane.from}-${lane.to}`}
-              style={{ gridTemplateColumns: '56px minmax(0,1.2fr) minmax(0,0.6fr) minmax(0,0.6fr)' }}
-            >
-              <span className="spec-row__num">{String(i + 1).padStart(2, '0')}</span>
-              <h3 className="spec-row__title">
-                {lane.from} <span style={{ color: 'var(--sky)' }}>→</span> {lane.to}
-              </h3>
-              <p className="spec-row__text numeric">{lane.distance}</p>
-              <p className="spec-row__text numeric" style={{ color: 'var(--ocean)', fontWeight: 600 }}>
-                {lane.transit}
-              </p>
+        <div className="route-control-panel">
+          <Reveal className="route-control-panel__rail">
+            <div className="route-control-panel__badge">
+              <span className="route-control-panel__badge-icon">
+                <Icon name="route" size={20} />
+              </span>
+              <span>AGL lane board</span>
             </div>
-          ))}
-        </Reveal>
+            <h3>Movement planned around the plant, not the postcode.</h3>
+            <p>
+              Every lane is backed by a branch team, a vehicle class and a practical delivery window —
+              so your dispatch plan has something solid to work with.
+            </p>
+            <div className="route-control-panel__stats">
+              <div>
+                <strong>{LANES.length}</strong>
+                <span>published lanes</span>
+              </div>
+              <div>
+                <strong>72h</strong>
+                <span>network reach</span>
+              </div>
+              <div>
+                <strong>24×7</strong>
+                <span>control tower</span>
+              </div>
+            </div>
+            <div className="route-control-panel__footer">
+              <span className="route-control-panel__pulse" />
+              <span>Lane planning active</span>
+              <span className="route-control-panel__footer-note">Same-day quote support</span>
+            </div>
+          </Reveal>
+
+          <RevealGroup className="route-cards">
+            {LANES.map((lane, i) => (
+              <motion.article
+                className="route-card"
+                key={`${lane.from}-${lane.to}`}
+                variants={revealItem}
+              >
+                <div className="route-card__header">
+                  <span className="route-card__index">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="route-card__status">Active lane</span>
+                </div>
+                <div className="route-card__journey">
+                  <div className="route-card__node">
+                    <span>Origin</span>
+                    <strong>{lane.from}</strong>
+                  </div>
+                  <span className="route-card__connector" aria-hidden="true">
+                    <span />
+                    <Icon name="arrowRight" size={17} />
+                  </span>
+                  <div className="route-card__node route-card__node--destination">
+                    <span>Destination</span>
+                    <strong>{lane.to}</strong>
+                  </div>
+                </div>
+                <div className="route-card__meta">
+                  <div>
+                    <span>Distance</span>
+                    <strong>{lane.distance}</strong>
+                  </div>
+                  <div>
+                    <span>Transit norm</span>
+                    <strong>{lane.transit}</strong>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </RevealGroup>
+        </div>
 
         <Reveal delay={0.1} style={{ marginTop: '2rem' }}>
-          <p className="form-note">
-            Lanes beyond this list are quoted on request — our branch network reaches most industrial
-            destinations in western and southern India within 72 hours.
-          </p>
-        </Reveal>
-      </Section>
-
-      {/* ---------- Advantages ---------- */}
-      <Section>
-        <div className="split-sticky">
-          <div className="sticky-col">
-            <span className="eyebrow">Advantages</span>
-            <h2 style={{ marginTop: '1rem' }}>Why manufacturers move their base freight to us.</h2>
-            <p className="lead" style={{ marginTop: '1.25rem' }}>
-              Not because we are the cheapest quote on the table — because the total cost of a delayed or
-              detained vehicle is considerably higher than the rate difference.
+          <div className="route-board-note">
+            <Icon name="clock" size={18} />
+            <p>
+              Need a lane beyond the board? Share the origin, destination, commodity and dispatch date —
+              our operations desk will build the right movement plan around it.
             </p>
-            <Button to="/contact" variant="ghost" style={{ marginTop: '2rem' }}>
-              Talk to the operations desk
-            </Button>
           </div>
-          <SpecRows items={ROAD_FREIGHT.advantages} />
-        </div>
+        </Reveal>
       </Section>
 
       {/* ---------- Industries ---------- */}
@@ -160,22 +197,6 @@ export default function RoadFreight() {
               <FeatureCard key={t.title} {...t} dark />
             ))}
           </RevealGroup>
-        </div>
-      </Section>
-
-      {/* ---------- FAQ ---------- */}
-      <Section>
-        <div className="grid grid--split" style={{ alignItems: 'start' }}>
-          <Reveal>
-            <span className="eyebrow">Road Freight FAQ</span>
-            <h2 style={{ marginTop: '1rem' }}>Practical answers.</h2>
-            <p className="lead" style={{ marginTop: '1.25rem' }}>
-              What clients ask before they place the first load with us.
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <Accordion items={ROAD_FREIGHT_FAQS} />
-          </Reveal>
         </div>
       </Section>
 

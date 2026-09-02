@@ -14,39 +14,28 @@ import usePageMeta from '@/hooks/usePageMeta';
 import { BRANCHES, BRANCH_REGIONS, getBranchPhones } from '@/data/branches';
 
 /** One expandable branch record in the directory below the map. */
-function BranchRow({ branch }) {
+function BranchRow({ branch, index }) {
   const [open, setOpen] = useState(false);
   const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     `${branch.address}, ${branch.city}`
   )}`;
 
   return (
-    <motion.div variants={revealItem} className="card" style={{ padding: 0, overflow: 'hidden' }}>
+    <motion.div variants={revealItem} className="branch-directory-card" data-open={open}>
       <button
+        className="branch-directory-card__trigger"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '1rem',
-          width: '100%',
-          padding: '1.4rem 1.6rem',
-          textAlign: 'left',
-        }}
       >
-        <span>
-          <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.08rem' }}>
-            {branch.city}
+        <span className="branch-directory-card__index numeric">{String(index + 1).padStart(2, '0')}</span>
+        <span className="branch-directory-card__identity">
+          <span className="branch-directory-card__city">{branch.city}</span>
+          <span className="branch-directory-card__state">
+            {branch.state}
+            {branch.hq && <span className="branch-directory-card__hq">Head Office</span>}
           </span>
-          {branch.hq && (
-            <span className="badge" style={{ marginLeft: '0.6rem', padding: '0.2rem 0.55rem' }}>
-              Head Office
-            </span>
-          )}
-          <span style={{ display: 'block', fontSize: '0.8rem', color: 'var(--grey)' }}>{branch.state}</span>
         </span>
-        <span className="accordion__sign" style={{ transform: open ? 'rotate(45deg)' : 'none' }}>
+        <span className="accordion__sign">
           <Icon name="plus" size={15} />
         </span>
       </button>
@@ -58,10 +47,10 @@ function BranchRow({ branch }) {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
-            style={{ overflow: 'hidden' }}
+            className="branch-directory-card__panel"
           >
-            <div style={{ padding: '0 1.6rem 1.6rem' }}>
-              <div className="branch-panel__rows" style={{ marginTop: 0 }}>
+            <div className="branch-directory-card__body">
+              <div className="branch-panel__rows branch-directory-card__rows">
                 <div className="branch-panel__row">
                   <Icon name="pin" size={16} />
                   <span>{branch.address}</span>
@@ -115,7 +104,6 @@ function BranchRow({ branch }) {
                 target="_blank"
                 rel="noreferrer"
                 className="link-arrow"
-                style={{ marginTop: '1.25rem' }}
               >
                 Open in Google Maps
                 <Icon name="external" size={14} />
@@ -153,8 +141,8 @@ export default function BranchNetwork() {
       <PageHero
         crumbs={[{ label: 'Branch Network' }]}
         eyebrow="Branch Network"
-        title="Presence measured in loading bays, not letterheads."
-        lead="Every branch below is a working operation with its own manager, vehicles and industrial catchment — placed where our clients manufacture."
+        title="Where industry moves, we move with it."
+        lead="From Gujarat’s manufacturing belts to the corridors of the South, every branch brings local intelligence, ready capacity and one accountable team closer to the cargo."
         meta={[
           { value: BRANCHES.length, label: 'Branch locations' },
           { value: '4', label: 'States & UTs' },
@@ -163,42 +151,68 @@ export default function BranchNetwork() {
         ]}
       />
 
-      <Section>
+      <Section className="branch-network-map-section">
         <SectionHeading
-          eyebrow="Interactive Map"
-          title="Explore the network."
+          eyebrow="Live Network View"
+          title="A network built around the work."
           lead="Filter by region, then hover or tap any node to see the branch manager, the belt it serves and the corridors it feeds."
         />
-        <BranchLocator initialId={initialId} />
+        <div className="branch-network-map__frame">
+          <BranchLocator initialId={initialId} />
+        </div>
       </Section>
 
-      <Section tone="surface">
+      <Section tone="ice" className="branch-directory-section">
         <SectionHeading
           eyebrow="Branch Directory"
-          title="Every branch, with a name and a number."
-          lead="Expand a branch for the address, manager, direct contact details and the industrial area it covers."
+          title="Choose a location. Get the whole picture."
+          lead="Every location has a local manager, direct contacts and a defined industrial catchment. Open one branch at a time to see its operating details."
         />
 
+        <div className="branch-directory__overview">
+          <div>
+            <span className="branch-directory__overview-value numeric">{BRANCHES.length}</span>
+            <span className="branch-directory__overview-label">active locations</span>
+          </div>
+          <div>
+            <span className="branch-directory__overview-value numeric">4</span>
+            <span className="branch-directory__overview-label">states connected</span>
+          </div>
+          <div>
+            <span className="branch-directory__overview-value numeric">20+</span>
+            <span className="branch-directory__overview-label">industrial belts</span>
+          </div>
+          <div className="branch-directory__overview-note">
+            <Icon name="route" size={18} />
+            <span>Tap any branch to reveal direct coordination details.</span>
+          </div>
+        </div>
+
+        <div className="branch-directory__groups">
         {grouped.map((group) => (
-          <div key={group.region} style={{ marginTop: '2.5rem' }}>
-            <Reveal className="row" style={{ marginBottom: '1.25rem' }}>
-              <h3 style={{ fontSize: 'var(--fs-h3)' }}>{group.region}</h3>
+          <div key={group.region} className="branch-directory__group">
+            <Reveal className="branch-directory__group-head">
+              <div>
+                <span className="branch-directory__group-kicker">Operating region</span>
+                <h3>{group.region}</h3>
+              </div>
               <span className="badge">{group.items.length} branches</span>
             </Reveal>
 
             <motion.div
-              className="grid grid--3"
+              className="branch-directory-grid"
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: '-60px' }}
               variants={{ show: { transition: { staggerChildren: 0.05 } } }}
             >
-              {group.items.map((b) => (
-                <BranchRow key={b.id} branch={b} />
+              {group.items.map((b, index) => (
+                <BranchRow key={b.id} branch={b} index={index} />
               ))}
             </motion.div>
           </div>
         ))}
+        </div>
       </Section>
 
       <CTABand

@@ -31,8 +31,8 @@ const DESKS = [
   {
     icon: 'truck',
     label: 'Operations Desk',
-    value: COMPANY.phone,
-    href: `tel:${COMPANY.phone.replace(/\s/g, '')}`,
+    value: COMPANY.emergency,
+    href: `tel:${COMPANY.emergency.replace(/\s/g, '')}`,
     note: 'Bookings, vehicle placement and dispatch',
   },
   {
@@ -47,7 +47,7 @@ const DESKS = [
 export default function Contact() {
   usePageMeta(
     'Contact Us',
-    'Reach the Andhra Gujarat Logistics operations desk, sales team, control tower or any of our regional branch offices.'
+    'Reach the Andhra Gujarat Logistic operations desk, sales team, control tower or any of our regional branch offices.'
   );
 
   const regional = BRANCHES;
@@ -72,7 +72,7 @@ export default function Contact() {
 
       {/* ---------- Direct desks ---------- */}
       <Section>
-        <SectionHeading eyebrow="Direct Lines" title="Reach the right team first time." />
+        <SectionHeading eyebrow="Direct Lines" title="A direct line to the people who can move it." />
 
         <motion.div
           className="grid grid--4"
@@ -152,15 +152,15 @@ export default function Contact() {
       </Section>
 
       {/* ---------- Map ---------- */}
-      <Section tight>
+        <Section tight>
         <SectionHeading
           eyebrow="Find Us"
-          title="Corporate office, Ahmedabad."
-          lead="Replace the embed source with the client's exact Google Maps place link once confirmed."
+          title="Our head office, Ankleshwar."
+          lead="Find Andhra Gujarat Logistic at the centre of the industrial corridor we have served from the beginning."
         />
         <Reveal className="map-embed">
           <iframe
-            title="Andhra Gujarat Logistics — corporate office location"
+            title="Andhra Gujarat Logistic — corporate office location"
             src={`https://maps.google.com/maps?q=${mapQuery}&output=embed`}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"

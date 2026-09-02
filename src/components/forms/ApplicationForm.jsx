@@ -3,7 +3,6 @@ import FormSuccess from './FormSuccess';
 import Button from '@/components/buttons/Button';
 
 import useForm from '@/hooks/useForm';
-import { OPENINGS } from '@/data/careers';
 import { BRANCHES } from '@/data/branches';
 import { COMPANY } from '@/constants/company';
 
@@ -39,7 +38,6 @@ export default function ApplicationForm() {
           value={values.name}
           onChange={handleChange}
           error={errors.name}
-          placeholder="Your name"
           required
         />
         <FormField
@@ -49,7 +47,6 @@ export default function ApplicationForm() {
           value={values.phone}
           onChange={handleChange}
           error={errors.phone}
-          placeholder="+91 00000 00000"
           required
         />
         <FormField
@@ -59,7 +56,6 @@ export default function ApplicationForm() {
           value={values.email}
           onChange={handleChange}
           error={errors.email}
-          placeholder="name@email.com"
           required
         />
         <FormField
@@ -67,13 +63,12 @@ export default function ApplicationForm() {
           name="experience"
           value={values.experience}
           onChange={handleChange}
-          placeholder="e.g. 6 years"
         />
         <FormField
           label="Role applied for"
           name="role"
           as="select"
-          options={['Select role', ...OPENINGS.map((o) => o.title), 'Other / General application']}
+          options={['Select role', 'General application']}
           value={values.role}
           onChange={handleChange}
           error={errors.role}
@@ -95,7 +90,6 @@ export default function ApplicationForm() {
         as="textarea"
         value={values.message}
         onChange={handleChange}
-        placeholder="Tell us about your experience — the lanes, commodities or functions you have handled."
       />
 
       <Button type="submit" disabled={status === 'submitting'} showIcon={status !== 'submitting'}>

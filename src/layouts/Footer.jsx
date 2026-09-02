@@ -58,13 +58,25 @@ export default function Footer() {
         </div>
 
         <div className="footer__branches">
-          <h4 className="footer__heading">Branch Network</h4>
-          <div className="footer__branch-list">
-            {BRANCHES.map((b) => (
-              <Link key={b.id} to={`/branch-network?branch=${b.id}`}>
-                {b.city}
-              </Link>
-            ))}
+          <div className="footer__branch-content">
+            <h4 className="footer__heading">Branch Network</h4>
+            <div className="footer__branch-list">
+              {BRANCHES.map((b) => (
+                <Link key={b.id} to={`/branch-network?branch=${b.id}`}>
+                  {b.city}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className="footer__social-block">
+            <h4 className="footer__heading">Connect</h4>
+            <div className="footer__socials">
+              {COMPANY.socials.map((s) => (
+                <a key={s.label} href={s.href} aria-label={s.label} target="_blank" rel="noreferrer">
+                  <Icon name={s.icon} size={15} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -72,19 +84,9 @@ export default function Footer() {
           <span>
             © {year} {COMPANY.legalName}. All rights reserved.
           </span>
-          <span className="footer__credit">
-            Designed with love by{' '}
-            <a href="https://aayvimotechnologies.com" target="_blank" rel="noreferrer">
-              aayvimotechnologies.com
-            </a>
-          </span>
-          <div className="footer__socials">
-            {COMPANY.socials.map((s) => (
-              <a key={s.label} href={s.href} aria-label={s.label} target="_blank" rel="noreferrer">
-                <Icon name={s.icon} size={15} />
-              </a>
-            ))}
-          </div>
+          <a className="footer__credit" href="https://aayvimotechnologies.com" target="_blank" rel="noreferrer">
+            Designed by aayvimotechnologies
+          </a>
         </div>
       </div>
     </footer>

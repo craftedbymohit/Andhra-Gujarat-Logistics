@@ -23,7 +23,7 @@ import { BRANCHES } from '@/data/branches';
 export default function Home() {
   usePageMeta(
     'Transportation & Logistics Infrastructure',
-    'Andhra Gujarat Logistics delivers road freight, project cargo and customised logistics solutions across Gujarat, Andhra Pradesh and pan-India corridors.'
+    'Andhra Gujarat Logistic delivers road freight, project cargo and customised logistics solutions across Gujarat, Andhra Pradesh and pan-India corridors.'
   );
 
   const gujarat = BRANCHES.filter((b) => b.region === 'Gujarat').length;
@@ -106,7 +106,7 @@ export default function Home() {
       {/* ---------- Why Andhra Gujarat ---------- */}
       <Section tone="dark" className="why-logistics-section">
         <SectionHeading
-          eyebrow="Why Andhra Gujarat Logistics"
+          eyebrow="Why Andhra Gujarat Logistic"
           title="The difference is in the details."
           lead="Capacity is easy to promise. We make the rest visible."
         />

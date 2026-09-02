@@ -2,8 +2,8 @@ import PageHero from '@/components/hero/PageHero';
 import { Section } from '@/components/shared/Section';
 import SectionHeading from '@/components/sections/SectionHeading';
 import IndustryCard from '@/components/cards/IndustryCard';
-import FeatureCard from '@/components/cards/FeatureCard';
 import CTABand from '@/components/sections/CTABand';
+import Button from '@/components/buttons/Button';
 import Icon from '@/components/shared/Icon';
 import Reveal, { RevealGroup } from '@/components/animations/Reveal';
 
@@ -21,8 +21,8 @@ export default function Industries() {
       <PageHero
         crumbs={[{ label: 'Industries' }]}
         eyebrow="Industries We Serve"
-        title="Eight sectors. Eight different ways cargo can go wrong."
-        lead="A chemical drum, a steel coil, a pharma batch and a textile roll fail in completely different ways. We plan for the failure mode — the tonnage is the easy part."
+        title="Critical cargo deserves more than a standard route."
+        lead="From chemical drums to pharma batches, steel coils to precision machinery, we engineer every movement around how your cargo is made, handled and delivered."
         meta={[
           { value: '8', label: 'Industry verticals' },
           { value: '500+', label: 'Industrial clients' },
@@ -32,24 +32,32 @@ export default function Industries() {
       />
 
       {/* Jump links so a visitor can go straight to their sector. */}
-      <Section tight edge>
-        <Reveal className="row" style={{ gap: '0.5rem' }}>
-          <span className="eyebrow" style={{ marginRight: '0.75rem' }}>
-            Jump to
-          </span>
-          {INDUSTRIES.map((ind) => (
-            <a key={ind.id} href={`#${ind.id}`} className="branch-tab">
-              {ind.title}
-            </a>
-          ))}
-        </Reveal>
+      <Section tight edge className="industry-jump-section">
+        <div className="industry-jump">
+          <Reveal className="industry-jump__intro">
+            <span className="eyebrow">Jump to</span>
+            <h2>Start with the cargo you know.</h2>
+            <p>Choose a sector to see the way we protect its timing, condition and continuity.</p>
+          </Reveal>
+          <div className="industry-jump__grid">
+            {INDUSTRIES.map((ind, index) => (
+              <a key={ind.id} href={`#${ind.id}`} className="industry-jump__item">
+                <span className="industry-jump__number numeric">{String(index + 1).padStart(2, '0')}</span>
+                <span className="industry-jump__icon">
+                  <Icon name={ind.icon} size={18} />
+                </span>
+                <span className="industry-jump__title">{ind.title}</span>
+                <Icon name="arrowRight" size={16} />
+              </a>
+            ))}
+          </div>
+        </div>
       </Section>
 
       <Section>
         <SectionHeading
           eyebrow="Sector Capability"
-          title="What we actually do differently, per sector."
-          lead="Vehicle specification, handling protocol, documentation standard and driver training all change with the commodity."
+          title="Every cargo has a different risk profile."
         />
         <RevealGroup className="grid grid--2">
           {INDUSTRIES.map((ind) => (
@@ -58,62 +66,27 @@ export default function Industries() {
         </RevealGroup>
       </Section>
 
-      <Section tone="dark">
-        <div className="grid-backdrop" />
-        <div style={{ position: 'relative', zIndex: 2 }}>
-          <SectionHeading
-            eyebrow="Cross-Sector Standards"
-            title="What every industry gets, regardless of commodity."
-          />
-          <RevealGroup className="grid grid--4">
-            {[
-              {
-                icon: 'shield',
-                title: 'Verified Compliance',
-                text: 'Permits, fitness, insurance and driver documents checked before allocation.',
-              },
-              {
-                icon: 'satellite',
-                title: 'GPS Visibility',
-                text: 'Live position and exception alerts on every consignment under an AGL LR.',
-              },
-              {
-                icon: 'file',
-                title: 'Digital Paper Trail',
-                text: 'E-way bill, LR and POD archived against a single consignment reference.',
-              },
-              {
-                icon: 'users',
-                title: 'Named Ownership',
-                text: 'One operations owner per account, with a defined escalation ladder.',
-              },
-            ].map((f) => (
-              <FeatureCard key={f.title} {...f} dark />
-            ))}
-          </RevealGroup>
-        </div>
-      </Section>
-
-      <Section tone="ice">
-        <div className="grid grid--split">
-          <Reveal>
+      <Section className="industry-inquiry-section">
+        <div className="industry-inquiry">
+          <Reveal className="industry-inquiry__intro">
+            <span className="industry-inquiry__icon">
+              <Icon name="route" size={25} />
+            </span>
             <span className="eyebrow">Not Listed?</span>
-            <h2 style={{ marginTop: '1rem' }}>Most cargo is a variation on something we already move.</h2>
+            <h2>Tell us what you make. We’ll map the move.</h2>
           </Reveal>
-          <Reveal delay={0.1}>
+          <Reveal delay={0.1} className="industry-inquiry__content">
             <p className="lead">
-              If your commodity is not on this page, it usually means we have not written it up — not that we
-              cannot handle it. Send the specification and our operations desk will tell you plainly whether it
-              is within our capability, and what it would take.
+              Your cargo does not need to fit a category to deserve a clear answer. Share the material, dimensions,
+              origin and destination, and our operations team will assess the route, vehicle and handling plan.
             </p>
-            <div className="row" style={{ marginTop: '1.75rem', gap: '1.5rem' }}>
-              <span className="row" style={{ gap: '0.5rem', color: 'var(--ocean)', fontWeight: 600 }}>
-                <Icon name="check" size={16} />
-                Honest capability assessment
-              </span>
-              <span className="row" style={{ gap: '0.5rem', color: 'var(--ocean)', fontWeight: 600 }}>
-                <Icon name="check" size={16} />
-                Response within one working day
+            <div className="industry-inquiry__actions">
+              <Button to="/contact" size="sm" icon="arrowRight">
+                Discuss your cargo
+              </Button>
+              <span>
+                <Icon name="check" size={15} />
+                Straight answer within one working day
               </span>
             </div>
           </Reveal>

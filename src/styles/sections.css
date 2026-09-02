@@ -123,6 +123,17 @@
   color: var(--white);
   overflow: hidden;
 }
+.page-hero--careers {
+  background: linear-gradient(90deg, rgba(5, 22, 37, 0.96) 0%, rgba(5, 22, 37, 0.84) 48%, rgba(5, 22, 37, 0.5) 100%),
+    url('../../assets/team_carrer.jpg') center / cover no-repeat;
+}
+.page-hero--careers::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+  background: linear-gradient(180deg, rgba(11, 153, 238, 0.12), transparent 52%);
+  pointer-events: none;
+}
 .page-hero__inner {
   position: relative;
   z-index: 2;
@@ -1436,7 +1447,211 @@
   color: var(--white);
 }
 
+/* ---------------- Branch network redesign ---------------- */
+.branch-network-map-section {
+  overflow: hidden;
+}
+.branch-network-map__frame {
+  position: relative;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--r-lg) + 4px);
+  background: linear-gradient(135deg, var(--surface), var(--surface-ice));
+  box-shadow: var(--shadow-md);
+}
+.section--dark .branch-tab {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.74);
+}
+.section--dark .branch-tab:hover {
+  border-color: var(--sky);
+  color: var(--white);
+}
+.section--dark .branch-tab[data-active='true'] {
+  color: var(--white);
+}
+
+.branch-directory__overview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 0.72fr)) minmax(15rem, 1.7fr);
+  gap: 1px;
+  margin-top: 2.5rem;
+  overflow: hidden;
+  border: 1px solid var(--sky-14);
+  border-radius: var(--r-lg);
+  background: var(--sky-14);
+}
+.branch-directory__overview > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 7rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.78);
+}
+.branch-directory__overview-value {
+  font-size: clamp(1.65rem, 3vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ocean);
+}
+.branch-directory__overview-label {
+  margin-top: 0.45rem;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.branch-directory__overview-note {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--ink-72);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+.branch-directory__overview-note svg {
+  flex: none;
+  color: var(--sky);
+}
+.branch-directory__groups {
+  margin-top: clamp(3rem, 6vw, 5rem);
+}
+.branch-directory__group + .branch-directory__group {
+  margin-top: clamp(2rem, 4vw, 3.25rem);
+  padding-top: clamp(2rem, 4vw, 3.25rem);
+  border-top: 1px solid var(--sky-14);
+}
+.branch-directory__group-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.branch-directory__group-kicker {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sky);
+}
+.branch-directory__group-head h3 {
+  font-size: var(--fs-h3);
+  letter-spacing: -0.04em;
+}
+.branch-directory-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  grid-auto-rows: max-content;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+.branch-directory-card {
+  align-self: start;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.branch-directory-card:hover,
+.branch-directory-card[data-open='true'] {
+  border-color: var(--sky-30);
+  box-shadow: var(--shadow-md);
+}
+.branch-directory-card[data-open='true'] {
+  transform: translateY(-2px);
+}
+.branch-directory-card__trigger {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.9rem;
+  width: 100%;
+  padding: 1.15rem 1.25rem;
+  text-align: left;
+}
+.branch-directory-card__index {
+  align-self: start;
+  padding-top: 0.2rem;
+  font-size: 0.72rem;
+  color: var(--sky);
+}
+.branch-directory-card__identity {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.branch-directory-card__city {
+  font-family: var(--font-heading);
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.branch-directory-card__state {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--grey);
+}
+.branch-directory-card__hq {
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--r-pill);
+  background: var(--sky-08);
+  color: var(--ocean);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.branch-directory-card[data-open='true'] .accordion__sign {
+  transform: rotate(45deg);
+  background: var(--sky-08);
+  border-color: var(--sky-30);
+}
+.branch-directory-card__panel {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+}
+.branch-directory-card__body {
+  padding: 0 1.25rem 1.25rem;
+}
+.branch-directory-card__rows {
+  margin-top: 0;
+  padding-top: 1.15rem;
+}
+.branch-directory-card__body .link-arrow {
+  margin-top: 1.15rem;
+}
+
+@media (max-width: 900px) {
+  .branch-directory-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .branch-directory__overview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .branch-directory__overview-note {
+    grid-column: 1 / -1;
+  }
+}
+
 @media (max-width: 640px) {
+  .branch-directory__group-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
   .branch-panel__footer {
     align-items: flex-start;
     flex-direction: column;

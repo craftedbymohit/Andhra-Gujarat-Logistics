@@ -7,23 +7,23 @@
  */
 
 export const COMPANY = {
-  name: 'Andhra Gujarat Logistics',
+  name: 'Andhra Gujarat Logistic',
   shortName: 'AGL',
-  legalName: 'Andhra Gujarat Logistics Pvt. Ltd.',
+  legalName: 'Andhra Gujarat Logistic Pvt. Ltd.',
   tagline: 'Moving Industries. Not Just Cargo.',
   established: 2012,
 
-  phone: '+91 98250 00000',
-  phoneAlt: '+91 90990 00000',
-  whatsapp: '919825000000',
-  email: 'info@andhragujaratlogistics.com',
+  phone: '+91 93746 19333',
+  phoneAlt: '+91 93775 24908',
+  whatsapp: '919979014440',
+  email: 'andhragujaratlog@yahoo.com',
   salesEmail: 'sales@andhragujaratlogistics.com',
   careersEmail: 'careers@andhragujaratlogistics.com',
-  emergency: '+91 98250 11111',
+  emergency: '+91 9979014440',
 
   hq: {
     label: 'Corporate Office',
-    lines: ['Plot 214, Transport Nagar Road', 'Aslali, Ahmedabad — 382427', 'Gujarat, India'],
+    lines: ['Ankleshwar, Gujarat'],
   },
 
   hours: [

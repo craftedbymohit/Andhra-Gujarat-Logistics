@@ -1,49 +1,53 @@
-import { motion } from 'framer-motion';
-
 import PageHero from '@/components/hero/PageHero';
 import { Section } from '@/components/shared/Section';
 import SectionHeading from '@/components/sections/SectionHeading';
 import FeatureCard from '@/components/cards/FeatureCard';
-import SpecRows from '@/components/sections/SpecRows';
+import Button from '@/components/buttons/Button';
 import ApplicationForm from '@/components/forms/ApplicationForm';
 import CTABand from '@/components/sections/CTABand';
 import Icon from '@/components/shared/Icon';
-import Reveal, { RevealGroup, revealItem } from '@/components/animations/Reveal';
+import Reveal, { RevealGroup } from '@/components/animations/Reveal';
 
 import usePageMeta from '@/hooks/usePageMeta';
-import { BENEFITS, CULTURE, HIRING_STEPS, OPENINGS } from '@/data/careers';
+import { BENEFITS, CULTURE, OPENINGS } from '@/data/careers';
 import { COMPANY } from '@/constants/company';
 import { BRANCHES } from '@/data/branches';
 
 export default function Careers() {
   usePageMeta(
     'Careers',
-    'Open roles across the Andhra Gujarat Logistics branch network — operations, project cargo, control tower, fleet and driving positions.'
+    'Build your career with Andhra Gujarat Logistic. There are no current openings, but we welcome strong general applications for future roles.'
   );
 
   return (
     <>
       <PageHero
+        className="page-hero--careers"
         crumbs={[{ label: 'Careers' }]}
         eyebrow="Careers"
-        title="Build the network, not just work in it."
-        lead="We hire people who want operating responsibility early. Several of our branch heads joined as executives — internal movement is how this company has always grown."
+        title="Build the network. Shape what comes next."
+        lead="We give capable people more than a role: an early seat at the table, real ownership on the ground, and room to grow into the people the operation depends on."
         meta={[
-          { value: `${OPENINGS.length}`, label: 'Open positions' },
+          { value: `${OPENINGS.length}`, label: 'Current openings' },
           { value: `${BRANCHES.length}`, label: 'Branch locations' },
-          { value: '5 days', label: 'Screening turnaround' },
+          { value: '24×7', label: 'Operations network' },
           { value: '4×/yr', label: 'Training cycles' },
         ]}
       />
 
       {/* ---------- Culture ---------- */}
-      <Section>
-        <SectionHeading
-          eyebrow="Life at AGL"
-          title="What working here actually looks like."
-          lead="Long hours when a consignment demands it, real authority at branch level, and no pressure to compromise on safety to save a schedule."
-        />
-        <RevealGroup className="grid grid--3">
+      <Section tone="surface" className="careers-life-section">
+        <div className="careers-life-header">
+          <Reveal>
+            <span className="eyebrow">Life at AGL</span>
+            <h2>Own the outcome, not just the task.</h2>
+          </Reveal>
+          <Reveal delay={0.1} className="careers-life-marker">
+            <span className="numeric">01</span>
+            <span>Work that travels farther than your job title.</span>
+          </Reveal>
+        </div>
+        <RevealGroup className="careers-culture-grid">
           {CULTURE.map((c) => (
             <FeatureCard key={c.title} {...c} />
           ))}
@@ -80,57 +84,33 @@ export default function Careers() {
         </div>
       </Section>
 
-      {/* ---------- Hiring process ---------- */}
-      <Section>
-        <div className="split-sticky">
-          <div className="sticky-col">
-            <span className="eyebrow">Hiring Process</span>
-            <h2 style={{ marginTop: '1rem' }}>Five steps, no silence in between.</h2>
-            <p className="lead" style={{ marginTop: '1.25rem' }}>
-              You will hear back either way. We commit to a decision within five working days of screening.
-            </p>
-          </div>
-          <SpecRows items={HIRING_STEPS} />
-        </div>
-      </Section>
-
       {/* ---------- Openings ---------- */}
-      <Section tone="ice">
-        <SectionHeading
-          eyebrow="Open Positions"
-          title="Currently hiring."
-          lead="Do not see your role? Send a general application — we keep strong profiles on file for the next branch opening."
-        />
-
-        <motion.div
-          className="stack"
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: '-60px' }}
-          variants={{ show: { transition: { staggerChildren: 0.06 } } }}
-        >
-          {OPENINGS.map((job) => (
-            <motion.div variants={revealItem} className="job-row" key={job.title}>
-              <span className="job-row__title">{job.title}</span>
-              <span className="job-row__cell">
-                <span>Location</span>
-                {job.location}
+      <Section tone="ice" className="careers-openings-section">
+        <div className="careers-openings">
+          <Reveal className="careers-openings__intro">
+            <span className="eyebrow">Open Positions</span>
+            <span className="careers-openings__status">
+              <i /> No current openings
+            </span>
+            <h2>Nothing open today. Plenty worth staying for.</h2>
+          </Reveal>
+          <Reveal delay={0.1} className="careers-openings__content">
+            <p className="lead">
+              We are not hiring for a listed role right now, but the network keeps moving and new opportunities open
+              as it grows. Stay close: fill out the form or send your CV so we can reach you when the right opening
+              arrives.
+            </p>
+            <div className="careers-openings__actions">
+              <Button href="#apply" size="sm" icon="arrowRight">
+                Share your profile
+              </Button>
+              <span>
+                <Icon name="mail" size={15} />
+                Or email your CV to {COMPANY.careersEmail}
               </span>
-              <span className="job-row__cell">
-                <span>Type</span>
-                {job.type}
-              </span>
-              <span className="job-row__cell">
-                <span>Experience</span>
-                {job.experience}
-              </span>
-              <a href="#apply" className="link-arrow">
-                Apply
-                <Icon name="arrowRight" size={15} />
-              </a>
-            </motion.div>
-          ))}
-        </motion.div>
+            </div>
+          </Reveal>
+        </div>
       </Section>
 
       {/* ---------- Application ---------- */}
@@ -138,13 +118,14 @@ export default function Careers() {
         <div className="grid grid--split" style={{ alignItems: 'start' }}>
           <Reveal>
             <span className="eyebrow">Application Form</span>
-            <h2 style={{ marginTop: '1rem' }}>Apply in two minutes.</h2>
+            <h2 style={{ marginTop: '1rem' }}>Keep the door open.</h2>
             <p className="lead" style={{ marginTop: '1.25rem' }}>
-              Complete the form and email your CV to <a href={`mailto:${COMPANY.careersEmail}`}>{COMPANY.careersEmail}</a>{' '}
-              with the role in the subject line.
+              There are no active roles today, but we welcome strong general applications. Fill in the form and email
+              your CV to <a href={`mailto:${COMPANY.careersEmail}`}>{COMPANY.careersEmail}</a> so we can keep your
+              profile in view.
             </p>
             <div className="stack" style={{ marginTop: '2rem', gap: '0.75rem' }}>
-              {['Every application reviewed', 'Response within five working days', 'Roles across all 15 branches'].map(
+              {['Every application reviewed', 'Future opportunities considered', 'Roles across the branch network'].map(
                 (t) => (
                   <span className="row" key={t} style={{ gap: '0.6rem', color: 'var(--ocean)', fontWeight: 600 }}>
                     <Icon name="check" size={16} />

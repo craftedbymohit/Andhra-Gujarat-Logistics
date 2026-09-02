@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import PageHero from '@/components/hero/PageHero';
 import { Section } from '@/components/shared/Section';
@@ -8,32 +9,42 @@ import CompanyTimeline from '@/components/timeline/CompanyTimeline';
 import StatsBand from '@/components/counters/StatsBand';
 import CTABand from '@/components/sections/CTABand';
 import Icon from '@/components/shared/Icon';
-import Reveal, { RevealGroup, revealItem } from '@/components/animations/Reveal';
+import Reveal, { RevealGroup } from '@/components/animations/Reveal';
 
 import usePageMeta from '@/hooks/usePageMeta';
 import { COMPANY, KPIS } from '@/constants/company';
 import {
   CHAIRMAN,
   CSR,
-  LEADERSHIP,
   MISSION,
   VISION,
 } from '@/data/company';
 import { BRANCHES } from '@/data/branches';
 
 export default function About() {
+  const [directorIndex, setDirectorIndex] = useState(0);
+  const currentDirector = CHAIRMAN.people[directorIndex];
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setDirectorIndex((index) => (index + 1) % CHAIRMAN.people.length);
+    }, 4500);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
   usePageMeta(
     'About Us',
-    'The story, leadership and operating standards behind Andhra Gujarat Logistics — a four-state transportation network built since 2012.'
+    'The story and operating standards behind Andhra Gujarat Logistic — a four-state transportation network built since 2012.'
   );
 
   return (
     <>
       <PageHero
         crumbs={[{ label: 'About Us' }]}
-        eyebrow="About Andhra Gujarat Logistics"
+        eyebrow="About Andhra Gujarat Logistic"
         title="Built around the corridors industry depends on."
-        lead="Andhra Gujarat Logistic began in 2012 in Ankleshwar and Hyderabad by Bajranglal Sharma & Kamlesh Sharma."
+        lead="Andhra Gujarat Logistic began in 2012 in Ankleshwar and Hyderabad by Bajrang Lal Sharma & Kamlesh Sharma."
         meta={[
           { value: `${new Date().getFullYear() - COMPANY.established}+`, label: 'Years operating' },
           { value: BRANCHES.length, label: 'Branch locations' },
@@ -55,7 +66,7 @@ export default function About() {
           </Reveal>
           <Reveal delay={0.1} className="story-copy">
             <p className="story-copy__lead">
-              Andhra Gujarat Logistic began in 2012 in Ankleshwar and Hyderabad by Bajranglal Sharma & Kamlesh
+              Andhra Gujarat Logistic began in 2012 in Ankleshwar and Hyderabad by Bajrang Lal Sharma & Kamlesh
               Sharma.
             </p>
             <p>
@@ -75,22 +86,44 @@ export default function About() {
       <Section tone="surface">
         <div className="chairman">
           <Reveal className="chairman__portrait">
-            {/* Replace with the chairman's photograph when supplied. */}
             <div className="grid-backdrop" />
-            <span className="chairman__initials">{CHAIRMAN.initials}</span>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentDirector.name}
+                className="chairman__portrait-slide"
+                initial={{ opacity: 0, x: 16 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -16 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {currentDirector.image ? (
+                  <img src={currentDirector.image} alt={currentDirector.name} />
+                ) : (
+                  <span className="chairman__initials">{currentDirector.initials}</span>
+                )}
+              </motion.div>
+            </AnimatePresence>
+            <div className="chairman__portrait-label">
+              <strong>{currentDirector.name}</strong>
+              <span>{currentDirector.role}</span>
+            </div>
           </Reveal>
 
           <Reveal delay={0.1}>
-            <span className="eyebrow">Chairman&apos;s Message</span>
+            <span className="eyebrow">A Message from Our Directors</span>
             <p className="chairman__quote" style={{ marginTop: '1.25rem' }}>
               &ldquo;{CHAIRMAN.quote}&rdquo;
             </p>
             <p style={{ marginTop: '1.25rem' }}>{CHAIRMAN.note}</p>
             <div className="chairman__sig">
-              <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 700 }}>{CHAIRMAN.name}</div>
-              <div className="muted" style={{ fontSize: '0.85rem' }}>
-                {CHAIRMAN.role}
-              </div>
+              {CHAIRMAN.people.map((person) => (
+                <div key={person.name} style={{ marginBottom: '0.65rem' }}>
+                  <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 700 }}>{person.name}</div>
+                  <div className="muted" style={{ fontSize: '0.85rem' }}>
+                    {person.role}
+                  </div>
+                </div>
+              ))}
             </div>
           </Reveal>
         </div>
@@ -137,31 +170,6 @@ export default function About() {
           />
           <StatsBand items={KPIS} dark />
         </div>
-      </Section>
-
-      {/* ---------- Leadership ---------- */}
-      <Section>
-        <SectionHeading
-          eyebrow="Leadership"
-          title="People who have run the lanes themselves."
-          lead="Our leadership came up through operations. Every one of them has stood at a loading bay at two in the morning."
-        />
-        <RevealGroup className="grid grid--3">
-          {LEADERSHIP.map((p) => (
-            <motion.article variants={revealItem} className="leader-card" key={p.name}>
-              <span className="leader-card__avatar">
-                {p.name
-                  .split(' ')
-                  .map((n) => n[0])
-                  .join('')
-                  .slice(0, 2)}
-              </span>
-              <h3 className="leader-card__name">{p.name}</h3>
-              <div className="leader-card__role">{p.role}</div>
-              <p className="leader-card__bio">{p.bio}</p>
-            </motion.article>
-          ))}
-        </RevealGroup>
       </Section>
 
       {/* ---------- CSR ---------- */}

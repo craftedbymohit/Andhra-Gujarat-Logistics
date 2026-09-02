@@ -1,14 +1,10 @@
 import PageHero from '@/components/hero/PageHero';
 import { Section } from '@/components/shared/Section';
 import SectionHeading from '@/components/sections/SectionHeading';
-import FeatureCard from '@/components/cards/FeatureCard';
-import SpecRows from '@/components/sections/SpecRows';
-import ProcessTimeline from '@/components/timeline/ProcessTimeline';
 import Accordion from '@/components/shared/Accordion';
 import CTABand from '@/components/sections/CTABand';
-import Button from '@/components/buttons/Button';
 import Icon from '@/components/shared/Icon';
-import Reveal, { RevealGroup } from '@/components/animations/Reveal';
+import Reveal from '@/components/animations/Reveal';
 
 import usePageMeta from '@/hooks/usePageMeta';
 import { PROJECT_CARGO } from '@/data/serviceDetails';
@@ -39,84 +35,68 @@ export default function ProjectCargo() {
       <Section>
         <SectionHeading
           eyebrow="Capability"
-          title="Six categories of movement we plan for."
-          lead="Each one fails differently. The planning changes accordingly — a windmill blade and a transformer share almost nothing beyond the word 'oversized'."
+          title="Built for the cargo that changes the route."
+          lead="From process equipment to power infrastructure, each movement is shaped around the load, the road and the site waiting at the other end."
         />
-        <RevealGroup className="grid grid--3">
-          {PROJECT_CARGO.capabilities.map((c) => (
-            <FeatureCard key={c.title} {...c} />
+        <div className="project-capability-grid">
+          {PROJECT_CARGO.capabilities.map((c, i) => (
+            <Reveal as="article" className="project-capability-card" key={c.title} delay={i * 0.05}>
+              <div className="project-capability-card__topline">
+                <span className="project-capability-card__number">{String(i + 1).padStart(2, '0')}</span>
+                <span className="project-capability-card__icon">
+                  <Icon name={c.icon} size={21} />
+                </span>
+              </div>
+              <h3>{c.title}</h3>
+              <p>{c.text}</p>
+              <span className="project-capability-card__link">
+                Planned to the detail <Icon name="arrowRight" size={15} />
+              </span>
+            </Reveal>
           ))}
-        </RevealGroup>
-      </Section>
-
-      {/* ---------- Why route-first ---------- */}
-      <Section tone="dark">
-        <div className="grid-backdrop" />
-        <div className="grid grid--split" style={{ position: 'relative', zIndex: 2 }}>
-          <Reveal>
-            <span className="eyebrow">Route First</span>
-            <h2 style={{ marginTop: '1rem' }}>We survey before we quote, not after we load.</h2>
-            <p className="lead" style={{ marginTop: '1.25rem' }}>
-              An ODC consignment stopped at a bridge or an overhead line is not a delay — it is a stranded asset
-              blocking a public road while permissions are renegotiated. Everything we do on project movement
-              exists to make sure that call never has to be made.
-            </p>
-            <Button variant="light" to="/contact" style={{ marginTop: '2rem' }}>
-              Request a route survey
-            </Button>
-          </Reveal>
-
-          <RevealGroup className="grid grid--2">
-            {[
-              { icon: 'route', title: 'Physical survey', text: 'Every metre of the route driven and measured before commitment.' },
-              { icon: 'file', title: 'Method statement', text: 'A written plan issued to the client before mobilisation.' },
-              { icon: 'shield', title: 'Escorted transit', text: 'A supervisor travels with the consignment end to end.' },
-              { icon: 'chart', title: 'Daily reporting', text: 'Progress against plan reported every day of the movement.' },
-            ].map((f) => (
-              <FeatureCard key={f.title} {...f} dark />
-            ))}
-          </RevealGroup>
         </div>
       </Section>
 
       {/* ---------- Execution ---------- */}
-      <Section>
-        <div className="split-sticky">
-          <div className="sticky-col">
+      <Section tone="dark" className="project-execution-section">
+        <div className="project-execution-header">
+          <Reveal>
             <span className="eyebrow">Execution Process</span>
-            <h2 style={{ marginTop: '1rem' }}>Seven stages, none of which can be skipped.</h2>
-            <p className="lead" style={{ marginTop: '1.25rem' }}>
-              Project movement is compressed only by starting earlier — never by dropping a stage.
+            <h2>From feasibility to handover, every move has a named stage.</h2>
+            <p className="lead">
+              Project movement is compressed by starting earlier — never by dropping the checks that keep
+              people, equipment and the public road protected.
             </p>
-            <div className="row" style={{ gap: '0.5rem', marginTop: '2rem' }}>
-              <span className="badge">
-                <Icon name="clock" size={13} />
-                10–15 working days lead time
-              </span>
-            </div>
-          </div>
-          <SpecRows items={PROJECT_CARGO.execution} />
+          </Reveal>
+          <Reveal delay={0.1} className="project-execution-promise">
+            <span className="project-execution-promise__icon">
+              <Icon name="clock" size={21} />
+            </span>
+            <span className="project-execution-promise__label">Mobilisation window</span>
+            <strong>10–15 working days</strong>
+            <span>Typical lead time from approved scope to movement readiness.</span>
+          </Reveal>
         </div>
-      </Section>
 
-      {/* ---------- Risk ---------- */}
-      <Section tone="surface">
-        <SectionHeading
-          eyebrow="Risk Management"
-          title="Every movement carries a written risk register."
-          lead="Each item has a mitigation and a named owner. Nothing sits on the register unassigned."
-        />
-        <SpecRows items={PROJECT_CARGO.risks} />
-      </Section>
+        <div className="project-execution-board">
+          {PROJECT_CARGO.execution.map((step, i) => (
+            <Reveal as="article" className="project-execution-step" key={step.title} delay={i * 0.04}>
+              <div className="project-execution-step__number">{String(i + 1).padStart(2, '0')}</div>
+              <div className="project-execution-step__body">
+                <span>Stage {String(i + 1).padStart(2, '0')}</span>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </div>
+              <Icon name="arrowRight" size={18} className="project-execution-step__arrow" />
+            </Reveal>
+          ))}
+        </div>
 
-      {/* ---------- Standard lifecycle ---------- */}
-      <Section tone="ice">
-        <SectionHeading
-          eyebrow="Consignment Lifecycle"
-          title="The standard operating model still applies."
-          lead="Project movement adds survey and permissions — it does not replace the discipline that governs every consignment."
-        />
-        <ProcessTimeline />
+        <div className="project-execution-footer">
+          <span><Icon name="shield" size={16} /> Safety-led planning</span>
+          <span><Icon name="users" size={16} /> One accountable team</span>
+          <span><Icon name="file" size={16} /> Documented handover</span>
+        </div>
       </Section>
 
       {/* ---------- FAQ ---------- */}

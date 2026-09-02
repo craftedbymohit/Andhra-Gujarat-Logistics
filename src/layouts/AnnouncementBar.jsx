@@ -32,9 +32,9 @@ export default function AnnouncementBar() {
         </div>
 
         <div className="announce__links">
-          <a href={`tel:${COMPANY.phone.replace(/\s/g, '')}`}>
+          <a href={`tel:${COMPANY.emergency.replace(/\s/g, '')}`}>
             <Icon name="phone" size={13} />
-            {COMPANY.phone}
+            {COMPANY.emergency}
           </a>
           <a href={`mailto:${COMPANY.email}`}>
             <Icon name="mail" size={13} />
