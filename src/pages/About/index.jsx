@@ -86,8 +86,7 @@ export default function About() {
       <Section tone="surface">
         <div className="chairman">
           <Reveal className="chairman__portrait">
-            <div className="grid-backdrop" />
-            <AnimatePresence mode="wait">
+            <AnimatePresence initial={false} mode="sync">
               <motion.div
                 key={currentDirector.name}
                 className="chairman__portrait-slide"
@@ -103,10 +102,6 @@ export default function About() {
                 )}
               </motion.div>
             </AnimatePresence>
-            <div className="chairman__portrait-label">
-              <strong>{currentDirector.name}</strong>
-              <span>{currentDirector.role}</span>
-            </div>
           </Reveal>
 
           <Reveal delay={0.1}>

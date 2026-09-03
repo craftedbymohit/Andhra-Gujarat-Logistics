@@ -34,6 +34,13 @@ export default function CTABand({
               >
                 {COMPANY.phone}
               </Button>
+              <Button
+                variant="outline-light"
+                href={`tel:${COMPANY.phoneAlt.replace(/\s/g, '')}`}
+                icon="phone"
+              >
+                {COMPANY.phoneAlt}
+              </Button>
             </div>
           </div>
         </Reveal>

@@ -1,5 +1,8 @@
 /** About-page content: mission, vision, milestones, director message and CSR. */
 
+import bajranglalPortrait from '../../assets/bajranglal_sharma.jpeg';
+import kamleshPortrait from '../../assets/kamlesh_sharma.jpeg';
+
 export const MISSION =
   'To move India’s industrial output with the reliability of infrastructure — building a branch network, a professional workforce and an operating discipline that manufacturers can plan their production around.';
 
@@ -9,8 +12,8 @@ export const VISION =
 export const MILESTONES = [
   {
     year: '2012',
-    title: 'Ankleshwar becomes home',
-    text: 'Andhra Gujarat Logistic begins in Ankleshwar, with its head office established there.',
+    title: 'Ankleshwar & Hyderabad become home',
+    text: 'Andhra Gujarat Logistic begins in Ankleshwar & Hyderabad with its head office established in Ankleshwar.',
   },
   {
     year: '2014',
@@ -46,13 +49,13 @@ export const CHAIRMAN = {
       name: 'Bajrang Lal Sharma',
       role: 'Chairman',
       initials: 'BLS',
-      image: null,
+      image: bajranglalPortrait,
     },
     {
       name: 'Kamlesh Sharma',
-      role: 'Managing Director',
+      role: 'Chairman',
       initials: 'KS',
-      image: null,
+      image: kamleshPortrait,
     },
   ],
   quote: 'A reliable logistics partner is built on trust, discipline and the courage to stand behind every commitment. We carry that responsibility into every lane, every branch and every consignment.',

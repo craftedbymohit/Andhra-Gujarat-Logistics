@@ -20,7 +20,6 @@ export const CULTURE = [
 
 export const BENEFITS = [
   { icon: 'chart', title: 'Performance Incentives', text: 'Branch and individual performance-linked payouts.' },
-  { icon: 'users', title: 'Provident Fund & Gratuity', text: 'Full statutory benefits from date of joining.' },
   { icon: 'gear', title: 'Structured Training', text: 'Operations, safety and compliance training every quarter.' },
   { icon: 'clock', title: 'Driver Welfare Programme', text: 'Rest facilities, trip allowances and medical camps.' },
   { icon: 'route', title: 'Relocation Support', text: 'Assistance for transfers across the branch network.' },

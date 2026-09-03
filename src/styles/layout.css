@@ -92,8 +92,8 @@
 .logo__mark {
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   flex: none;
 }
 .logo__mark img {
@@ -109,10 +109,11 @@
 }
 .logo__name {
   font-family: var(--font-numeric);
-  font-size: 1.22rem;
+  font-size: clamp(0.9rem, 1.35vw, 1.18rem);
   font-weight: 700;
   line-height: 1;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.05em;
+  white-space: nowrap;
   color: var(--ocean);
 }
 .logo__sub {
@@ -136,8 +137,12 @@
   background: var(--white);
 }
 @media (max-width: 400px) {
-  .logo__sub {
-    display: none;
+  .logo__mark {
+    width: 46px;
+    height: 46px;
+  }
+  .logo__name {
+    font-size: 0.78rem;
   }
 }
 
@@ -501,6 +506,10 @@
   min-width: 0;
   white-space: nowrap;
   font-size: 0.84rem;
+}
+.footer__contact-row:first-child > span {
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 .footer__contact-row svg {
   flex: none;

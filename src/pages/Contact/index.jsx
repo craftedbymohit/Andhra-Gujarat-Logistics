@@ -16,8 +16,8 @@ import { BRANCHES } from '@/data/branches';
 const DESKS = [
   {
     icon: 'bell',
-    label: 'Emergency / Control Tower',
-    value: COMPANY.emergency,
+    label: 'Emergency No.',
+    value: `${COMPANY.emergency} / ${COMPANY.emergencyAlt}`,
     href: `tel:${COMPANY.emergency.replace(/\s/g, '')}`,
     note: 'Staffed 24 × 7 for consignments already in transit',
   },
@@ -37,10 +37,10 @@ const DESKS = [
   },
   {
     icon: 'users',
-    label: 'Careers',
-    value: COMPANY.careersEmail,
-    href: `mailto:${COMPANY.careersEmail}`,
-    note: 'Applications and recruitment enquiries',
+    label: 'Carrier',
+    value: COMPANY.email,
+    href: `mailto:${COMPANY.email}`,
+    note: 'Carrier partnerships and vehicle placement',
   },
 ];
 
@@ -58,6 +58,7 @@ export default function Contact() {
   return (
     <>
       <PageHero
+        className="page-hero--contact"
         crumbs={[{ label: 'Contact' }]}
         eyebrow="Contact"
         title="Talk to the desk that can actually help."

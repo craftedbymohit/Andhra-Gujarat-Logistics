@@ -10,8 +10,7 @@ export default function Logo({ light, className }) {
         <img src={logoIcon} alt="" aria-hidden="true" />
       </span>
       <span className="logo__text">
-        <span className="logo__name">Andhra Gujarat</span>
-        <span className="logo__sub">Logistic</span>
+        <span className="logo__name">ANDHRA GUJARAT LOGISTIC</span>
       </span>
     </Link>
   );

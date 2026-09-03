@@ -53,7 +53,7 @@ export const PROJECT_CARGO_FAQS = [
 export const GENERAL_FAQS = [
   {
     q: 'Which regions do you operate in?',
-    a: 'Our operating base is Gujarat and Andhra Pradesh, supported by branches at Delhi NCR, Mumbai, Pune, Nagpur and Chennai that let us run a genuine pan-India lane structure.',
+    a: 'Our operating base is Gujarat and Andhra Pradesh, supported by branches in Ahmedabad, Surat, Vapi, Ankleshwar, Kim, Hyderabad, Visakhapatnam, Vijayawada and Basavakalyan that let us run a genuine pan-India lane structure.',
   },
   {
     q: 'How quickly can a vehicle be placed?',

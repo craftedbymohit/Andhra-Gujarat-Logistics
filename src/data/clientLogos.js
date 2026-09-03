@@ -11,6 +11,9 @@ import rossari from '../../assets/rossari_logo.jpg';
 import rp from '../../assets/rp_logo.png';
 import unitopChemicals from '../../assets/unitopchemicals_logo.jpg';
 import vital from '../../assets/vital_logo.jpg';
+import ionExchange from '../../assets/ion_exchange.webp';
+import shreeSulphurics from '../../assets/shree_sulphurics.jpg';
+import bodalChemicals from '../../assets/bodal_chemicals.jpg';
 
 export const CLIENT_LOGOS = [
   { name: 'Alliance Fibres Ltd.', src: allianceFibres },
@@ -26,4 +29,7 @@ export const CLIENT_LOGOS = [
   { name: 'Riddhi Life Science', src: riddhiLifesciences },
   { name: 'Vital Chemtech Ltd.', src: vital },
   { name: 'Meghmani LLP', src: meghmani },
+  { name: 'Ion Exchange India Ltd.', src: ionExchange },
+  { name: 'Shree Sulphuric Pvt. Ltd.', src: shreeSulphurics },
+  { name: 'Bodal Chemicals', src: bodalChemicals },
 ];

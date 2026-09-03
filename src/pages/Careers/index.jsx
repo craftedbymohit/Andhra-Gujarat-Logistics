@@ -61,8 +61,8 @@ export default function Careers() {
             <span className="eyebrow">Benefits</span>
             <h2 style={{ marginTop: '1rem' }}>Looked after, on the road and off it.</h2>
             <p className="lead" style={{ marginTop: '1.25rem' }}>
-              Full statutory benefits from the date of joining, plus a driver welfare programme that treats the
-              people carrying the cargo as the front line of the business — because they are.
+              Practical support, meaningful development and a driver welfare programme that treats the people
+              carrying the cargo as the front line of the business — because they are.
             </p>
           </Reveal>
 

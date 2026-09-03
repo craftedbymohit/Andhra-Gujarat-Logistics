@@ -1,6 +1,6 @@
 /** Fleet catalogue for the showcase carousel and the Road Freight page. */
 
-import flatbedImage from '../../assets/flatbed.jpg';
+import kaTruckImage from '../../assets/ka_trucks.jpg';
 import lcvImage from '../../assets/lcv.jpg';
 import multiAxleImage from '../../assets/multiaxel_32ft.avif';
 import sxlImage from '../../assets/sxl_truck.jpg';
@@ -24,11 +24,11 @@ export const FLEET = [
   },
   {
     id: 'trailer',
-    name: '40 ft Flat-Bed Trailer',
-    image: flatbedImage,
-    use: 'Steel sections, machinery and containerised movement.',
+    name: '25–30 ft Open-Body Trucks',
+    image: kaTruckImage,
+    use: 'Open-deck flexibility for industrial cargo, steel sections and practical regional movement.',
     payload: '25–30 T',
-    length: '40 ft',
+    length: '25–30 ft',
   },
   {
     id: 'lcv',

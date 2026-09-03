@@ -17,13 +17,14 @@ export const COMPANY = {
   phoneAlt: '+91 93775 24908',
   whatsapp: '919979014440',
   email: 'andhragujaratlog@yahoo.com',
-  salesEmail: 'sales@andhragujaratlogistics.com',
+  salesEmail: 'andhragujaratlog@yahoo.com',
   careersEmail: 'careers@andhragujaratlogistics.com',
-  emergency: '+91 9979014440',
+  emergency: '+91 99790 14440',
+  emergencyAlt: '+91 76220 24908',
 
   hq: {
     label: 'Corporate Office',
-    lines: ['Ankleshwar, Gujarat'],
+    lines: ['Plot No. 2505 Mattex Battery Compound, Opp. Asian Paint Gate No. 2, G.I.D.C Ankleshwar-393002'],
   },
 
   hours: [

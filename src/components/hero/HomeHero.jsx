@@ -27,11 +27,12 @@ export default function HomeHero() {
         </span>
 
         <h1 className="hero__title">
-          Moving industry <em>forward.</em>
+          We Deliver <em>Excellence.</em>
         </h1>
 
         <p className="hero__sub">
-          Reliable road freight and project cargo for the corridors that keep India moving.
+          Connecting industries. Delivering excellence. Reliable road freight and project cargo for the
+          corridors that keep India moving.
         </p>
 
         <div className="hero__actions">

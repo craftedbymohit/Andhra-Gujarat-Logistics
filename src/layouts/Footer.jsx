@@ -6,8 +6,6 @@ import { FOOTER_COLUMNS } from '@/constants/navigation';
 import { BRANCHES } from '@/data/branches';
 
 export default function Footer() {
-  const year = new Date().getFullYear();
-
   return (
     <footer className="footer">
       <div className="container footer__inner">
@@ -82,7 +80,7 @@ export default function Footer() {
 
         <div className="footer__bottom">
           <span>
-            © {year} {COMPANY.legalName}. All rights reserved.
+            © 2026 Andhra Gujarat Logistic || All rights reserved
           </span>
           <a className="footer__credit" href="https://aayvimotechnologies.com" target="_blank" rel="noreferrer">
             Designed by aayvimotechnologies
