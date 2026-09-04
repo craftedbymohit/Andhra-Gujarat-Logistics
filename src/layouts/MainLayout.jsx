@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import AnnouncementBar from './AnnouncementBar';
 import Header from './Header';
@@ -14,7 +14,10 @@ import useLenis from '@/hooks/useLenis';
 /** Persistent chrome + animated route transition. */
 export default function MainLayout() {
   const { pathname } = useLocation();
+  const navigation = useNavigation();
   useLenis();
+
+  const isNavigating = navigation.state !== 'idle';
 
   return (
     <>
@@ -26,6 +29,8 @@ export default function MainLayout() {
       <ScrollToTop />
       <AnnouncementBar />
       <Header />
+
+      {isNavigating && <PageLoader />}
 
       <main id="main">
         <Suspense fallback={<PageLoader />}>

@@ -18,7 +18,7 @@ export const COMPANY = {
   whatsapp: '919979014440',
   email: 'andhragujaratlog@yahoo.com',
   salesEmail: 'andhragujaratlog@yahoo.com',
-  careersEmail: 'careers@andhragujaratlogistics.com',
+  careersEmail: 'andhragujaratlog@yahoo.com',
   emergency: '+91 99790 14440',
   emergencyAlt: '+91 76220 24908',
 

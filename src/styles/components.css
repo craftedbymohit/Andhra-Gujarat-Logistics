@@ -548,29 +548,117 @@ select.field__control {
   place-items: center;
   background: var(--white);
 }
-.loader__bar {
-  width: min(260px, 60vw);
-  height: 2px;
-  background: var(--line);
+.loader--exiting {
+  pointer-events: none;
+  animation: loader-fade-out 320ms ease forwards;
+}
+.truck-wrapper {
+  position: relative;
+  width: min(280px, 86vw);
+  height: 112px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
   overflow: hidden;
-  border-radius: var(--r-pill);
 }
-.loader__bar span {
-  display: block;
+.truck-body {
+  width: min(226px, 76vw);
+  margin-bottom: 6px;
+  animation: truck-motion 1s linear infinite;
+}
+.truck-svg {
+  width: 100%;
+  height: auto;
+}
+.truck-tires {
+  width: min(226px, 76vw);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px 0 15px;
+  position: absolute;
+  bottom: 0;
+}
+.tire-svg {
+  width: 24px;
+}
+.road {
+  width: 100%;
+  height: 1.5px;
+  background-color: #282828;
+  position: relative;
+  bottom: 0;
+  align-self: flex-end;
+  border-radius: 3px;
+}
+.road::before {
+  content: '';
+  position: absolute;
+  width: 20px;
   height: 100%;
-  width: 40%;
-  background: var(--grad-brand);
-  animation: loader-slide 1s var(--ease-inout) infinite;
+  background-color: #282828;
+  right: -50%;
+  border-radius: 3px;
+  animation: road-animation 1.4s linear infinite;
+  border-left: 10px solid white;
 }
-@keyframes loader-slide {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(350%);
-  }
+.road::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  background-color: #282828;
+  right: -65%;
+  border-radius: 3px;
+  animation: road-animation 1.4s linear infinite;
+  border-left: 4px solid white;
 }
 
+.lamp-post {
+  position: absolute;
+  right: -90%;
+  bottom: 0;
+  height: 90px;
+  animation: lamp-post-animation 1.4s linear infinite;
+}
+.lamp-post--2 {
+  animation-delay: -0.7s;
+}
+
+@keyframes truck-motion {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+@keyframes road-animation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-46px);
+  }
+}
+@keyframes lamp-post-animation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-620px);
+  }
+}
+@keyframes loader-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 /* Modal */
 .modal-backdrop {
   position: fixed;
