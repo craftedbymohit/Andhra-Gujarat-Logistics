@@ -351,6 +351,41 @@ select.field__control {
   line-height: 1.6;
 }
 
+.form-success {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--r-md);
+  background: var(--sky-08);
+  border: 1px solid var(--sky-14);
+  color: var(--ocean);
+  font-size: var(--fs-sm);
+}
+
+.form-error {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--r-md);
+  background: rgb(185 28 28 / 6%);
+  border: 1px solid rgb(185 28 28 / 22%);
+  color: #7f1d1d;
+  font-size: var(--fs-sm);
+}
+.form-error__retry {
+  align-self: flex-start;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /* ---------------- Accordion ---------------- */
 .accordion {
   border-top: 1px solid var(--line);

@@ -1,6 +1,6 @@
 import { COMPANY } from '@/constants/company';
 import FormField from './FormField';
-import EnquiryDraft from './EnquiryDraft';
+import FormError from './FormError';
 import Button from '@/components/buttons/Button';
 
 import useForm from '@/hooks/useForm';
@@ -25,13 +25,33 @@ const CITIES = ['Select city', ...new Set(BRANCHES.map((b) => b.city)), 'Other']
 
 /** The main lead-capture form — used inside the quote modal and on Contact. */
 export default function QuoteForm({ compact }) {
-  const { values, errors, status, handleChange, handleSubmit, edit } = useForm({
+  const { values, errors, status, submitError, handleChange, handleSubmit, retry } = useForm({
     initial: INITIAL,
     required: REQUIRED,
+    onSubmit: async (data) => {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, formType: 'quote' }),
+      });
+
+      // A static host or a deploy without the serverless function will answer
+      // the SPA fallback (index.html) with a 200. Never treat a bare 200 as
+      // delivery — require the endpoint's explicit JSON acknowledgement.
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok || result?.ok !== true) {
+        throw new Error(result?.error || 'We could not send your request. Please call us instead.');
+      }
+    },
   });
 
-  if (status === 'ready') {
-    return <EnquiryDraft values={values} subject="AGL quote request" email={COMPANY.salesEmail} onEdit={edit} />;
+  if (status === 'error') {
+    return <FormError onRetry={retry}>{submitError} Please contact {COMPANY.salesEmail} directly if the issue continues.</FormError>;
+  }
+
+  if (status === 'success') {
+    return <div className="form-success" role="status"><strong>Quote request received.</strong> Our team will respond within one working day.</div>;
   }
 
   return (
@@ -124,12 +144,11 @@ export default function QuoteForm({ compact }) {
         />
       )}
 
-      <Button type="submit">
-        Prepare quote email
+      <Button type="submit" disabled={status === 'submitting'}>
+        {status === 'submitting' ? 'Sending...' : 'Request a quote'}
       </Button>
 
       <p className="form-note">
-        This form prepares an email draft for you to send.
         We respond to quote requests within one working day. Your details are used only to prepare this
         quotation.
       </p>

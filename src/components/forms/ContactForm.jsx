@@ -1,6 +1,6 @@
 import { COMPANY } from '@/constants/company';
 import FormField from './FormField';
-import EnquiryDraft from './EnquiryDraft';
+import FormError from './FormError';
 import Button from '@/components/buttons/Button';
 
 import useForm from '@/hooks/useForm';
@@ -21,13 +21,44 @@ const SUBJECTS = [
 
 /** Quick inquiry form on the Contact page. */
 export default function ContactForm() {
-  const { values, errors, status, handleChange, handleSubmit, edit } = useForm({
+  const { values, errors, status, submitError, handleChange, handleSubmit, retry } = useForm({
     initial: INITIAL,
     required: REQUIRED,
+    onSubmit: async (data) => {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      // A static host or a deploy without the serverless function will answer
+      // the SPA fallback (index.html) with a 200. Never treat a bare 200 as
+      // delivery — require the endpoint's explicit JSON acknowledgement.
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok || result?.ok !== true) {
+        throw new Error(result?.error || 'We could not send your enquiry. Please call us instead.');
+      }
+    },
   });
 
-  if (status === 'ready') {
-    return <EnquiryDraft values={values} subject="AGL contact enquiry" email={COMPANY.email} onEdit={edit} />;
+  if (status === 'error') {
+    return (
+      <FormError onRetry={retry}>
+        <strong>Your message could not be sent.</strong> {submitError} You can reach the 24×7 control
+        tower on <a href={`tel:${COMPANY.emergency}`}>{COMPANY.emergency}</a> or email{' '}
+        <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>.
+      </FormError>
+    );
+  }
+
+  if (status === 'success') {
+    return (
+      <div className="form-success" role="status">
+        <strong>Thank you — your message has reached us.</strong> Our team responds within one working day.
+        For anything urgent, the 24×7 control tower is the fastest route.
+      </div>
+    );
   }
 
   return (
@@ -91,12 +122,11 @@ export default function ContactForm() {
         required
       />
 
-      <Button type="submit">
-        Prepare enquiry email
+      <Button type="submit" disabled={status === 'submitting'}>
+        {status === 'submitting' ? 'Sending...' : 'Send enquiry'}
       </Button>
 
       <p className="form-note">
-        This form prepares an email draft for you to send.
         We use your details only to respond to this enquiry. They are never shared with third parties.
       </p>
     </form>

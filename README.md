@@ -1,5 +1,56 @@
 # Andhra Gujarat Logistic
 
+## Contact form email setup
+
+The contact form sends enquiries through the Vercel serverless function at `/api/contact`.
+Configure these environment variables in Vercel (or in a local `.env` file):
+
+ - `SMTP_USER`: `andharagujratlog@gmail.com`
+ - `SMTP_APP_PASSWORD`: the Gmail app password for that account
+ - `CONTACT_RECIPIENT`: `andhragujaratlog@yahoo.com`
+
+Never commit the real app password. `.env` files are ignored by git; use `.env.example` as the template.
+
+Contact and quote forms validate locally and submit through the Vercel serverless
+function. Application forms prepare an email draft for the visitor to review and
+send. Business contacts, service claims and testimonial approval should be
+confirmed with the client before publication.
+React website built with Vite. Use Node.js 22.12+ (Node 24 was used for verification).
+
+```sh
+npm ci
+npm run dev
+npm run build
+npm run preview
+```
+
+The production output is `dist/`. Vercel and Netlify configurations route known
+pages to the React app and return `404.html` with HTTP 404 for unknown URLs.
+Fingerprint-named assets are cached for one year. Verify these hosting rules on
+the deployed domain; the local development server uses its own SPA fallback.
+
+All four social icons open `/social-coming-soon` in a new tab. Replace their URLs
+in `src/constants/company.js` when official accounts are available.
+
+The original client video and images are active. The branded loader appears on startup and normal button/link clicks (1.5 seconds plus its fade). Earlier compression measurements in `reports/` are historical. Only imported assets enter `dist/`.
+See `assets/README.md` for regeneration and font licensing.
+
+## Verification
+
+```sh
+node scripts/check-source.mjs
+npm audit
+python -m pip install playwright
+python scripts/check-site.py
+python scripts/audit-site.py final --measure-only
+python scripts/audit-site.py final --measure-only --gzip
+```
+
+Browser scripts use installed Windows Chrome and an ephemeral localhost server.
+They never send enquiries. Test results are saved in `reports/`; screenshots and
+temporary tooling are ignored in `.audit/` and `.tmp-tools/`.
+Baseline comparisons require the pre-change build at `.audit/baseline/`.
+
 React website built with Vite. Use Node.js 22.12+ (Node 24 was used for verification).
 
 ```sh
