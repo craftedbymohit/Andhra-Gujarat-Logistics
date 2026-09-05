@@ -1,5 +1,6 @@
+import { COMPANY } from '@/constants/company';
 import FormField from './FormField';
-import FormSuccess from './FormSuccess';
+import EnquiryDraft from './EnquiryDraft';
 import Button from '@/components/buttons/Button';
 
 import useForm from '@/hooks/useForm';
@@ -24,23 +25,13 @@ const CITIES = ['Select city', ...new Set(BRANCHES.map((b) => b.city)), 'Other']
 
 /** The main lead-capture form — used inside the quote modal and on Contact. */
 export default function QuoteForm({ compact }) {
-  const { values, errors, status, handleChange, handleSubmit } = useForm({
+  const { values, errors, status, handleChange, handleSubmit, edit } = useForm({
     initial: INITIAL,
     required: REQUIRED,
-    // TODO: point this at the client's CRM / form endpoint.
-    onSubmit: async (data) => {
-      console.info('Quote request', data);
-      await new Promise((r) => setTimeout(r, 700));
-    },
   });
 
-  if (status === 'success') {
-    return (
-      <FormSuccess>
-        <strong>Request received.</strong> Our operations desk will respond with a rate and vehicle
-        availability within one working day. For urgent movement, call the 24×7 control tower.
-      </FormSuccess>
-    );
+  if (status === 'ready') {
+    return <EnquiryDraft values={values} subject="AGL quote request" email={COMPANY.salesEmail} onEdit={edit} />;
   }
 
   return (
@@ -133,11 +124,12 @@ export default function QuoteForm({ compact }) {
         />
       )}
 
-      <Button type="submit" disabled={status === 'submitting'} showIcon={status !== 'submitting'}>
-        {status === 'submitting' ? 'Sending…' : 'Request a Quote'}
+      <Button type="submit">
+        Prepare quote email
       </Button>
 
       <p className="form-note">
+        This form prepares an email draft for you to send.
         We respond to quote requests within one working day. Your details are used only to prepare this
         quotation.
       </p>

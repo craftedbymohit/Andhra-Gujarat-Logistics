@@ -10,12 +10,13 @@ export default defineConfig({
     },
   },
   build: {
+    assetsInlineLimit: 0,
     rollupOptions: {
       output: {
         // Keep the animation libraries in their own chunk so the first paint stays light.
         manualChunks: {
           react: ['react', 'react-dom', 'react-router-dom'],
-          motion: ['framer-motion', 'gsap', 'lenis'],
+          motion: ['framer-motion'],
         },
       },
     },

@@ -34,10 +34,10 @@ export const COMPANY = {
   ],
 
   socials: [
-    { label: 'LinkedIn', icon: 'linkedin', href: '#' },
-    { label: 'Facebook', icon: 'facebook', href: '#' },
-    { label: 'Instagram', icon: 'instagram', href: '#' },
-    { label: 'YouTube', icon: 'youtube', href: '#' },
+    { label: 'LinkedIn', icon: 'linkedin', href: '/social-coming-soon' },
+    { label: 'Facebook', icon: 'facebook', href: '/social-coming-soon' },
+    { label: 'Instagram', icon: 'instagram', href: '/social-coming-soon' },
+    { label: 'YouTube', icon: 'youtube', href: '/social-coming-soon' },
   ],
 };
 

@@ -24,48 +24,6 @@
   }
 }
 
-/* Numbered spec rows — used for routes, advantages, execution steps. */
-.spec-rows {
-  border-top: 1px solid var(--line);
-}
-.spec-row {
-  display: grid;
-  grid-template-columns: 56px minmax(0, 1fr) minmax(0, 1.2fr);
-  gap: clamp(1rem, 3vw, 2.5rem);
-  align-items: baseline;
-  padding-block: 1.6rem;
-  border-bottom: 1px solid var(--line);
-  transition: background var(--dur-fast) var(--ease);
-}
-.spec-row:hover {
-  background: var(--surface);
-}
-@media (max-width: 720px) {
-  .spec-row {
-    grid-template-columns: 40px minmax(0, 1fr);
-  }
-  .spec-row__text {
-    grid-column: 2;
-  }
-}
-.spec-row__num {
-  font-family: var(--font-numeric);
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--sky);
-}
-.spec-row__title {
-  font-family: var(--font-heading);
-  font-size: 1.08rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-.spec-row__text {
-  font-size: var(--fs-sm);
-  line-height: 1.7;
-  color: var(--ink-72);
-}
-
 /* ---------------- About ---------------- */
 .story-grid {
   display: grid;
@@ -190,12 +148,9 @@
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-  padding: 0.7rem 0.85rem;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: var(--r-md);
-  background: rgba(10, 37, 64, 0.78);
+  padding: 0.35rem 0;
   color: var(--white);
-  backdrop-filter: blur(8px);
+  text-shadow: 0 2px 12px rgba(3, 17, 30, 0.9);
 }
 .chairman__portrait-label strong {
   font-family: var(--font-heading);

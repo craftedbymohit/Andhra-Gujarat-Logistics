@@ -7,7 +7,7 @@ export default function ClientLogos({ items = CLIENT_LOGOS }) {
       <div className="marquee__track">
         {[...items, ...items].map((client, i) => (
           <span className="marquee__item" key={`${client.name}-${i}`}>
-            <img src={client.src} alt={i < items.length ? client.name : ''} />
+            <img decoding="async" loading="lazy" src={client.src} alt={i < items.length ? client.name : ''} />
           </span>
         ))}
       </div>

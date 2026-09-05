@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
-import { Outlet, useLocation, useNavigation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { Outlet, useNavigation } from 'react-router-dom';
 import AnnouncementBar from './AnnouncementBar';
 import Header from './Header';
 import Footer from './Footer';
@@ -9,13 +8,10 @@ import ScrollToTop from '@/components/shared/ScrollToTop';
 import FloatingActions from '@/components/shared/FloatingActions';
 import QuoteModal from '@/components/modals/QuoteModal';
 import PageLoader from '@/components/loaders/PageLoader';
-import useLenis from '@/hooks/useLenis';
 
 /** Persistent chrome + animated route transition. */
 export default function MainLayout() {
-  const { pathname } = useLocation();
   const navigation = useNavigation();
-  useLenis();
 
   const isNavigating = navigation.state !== 'idle';
 
@@ -32,19 +28,9 @@ export default function MainLayout() {
 
       {isNavigating && <PageLoader />}
 
-      <main id="main">
+      <main id="main" tabIndex={-1}>
         <Suspense fallback={<PageLoader />}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={pathname}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.28, ease: 'easeOut' }}
-            >
-              <Outlet />
-            </motion.div>
-          </AnimatePresence>
+          <Outlet />
         </Suspense>
       </main>
 

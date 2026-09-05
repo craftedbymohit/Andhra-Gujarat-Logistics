@@ -2,7 +2,7 @@ import Button from '@/components/buttons/Button';
 import usePageMeta from '@/hooks/usePageMeta';
 
 export default function NotFound() {
-  usePageMeta('Page Not Found');
+  usePageMeta('Page Not Found', 'This page could not be found. Return home or contact Andhra Gujarat Logistic.', true);
 
   return (
     <section className="notfound">

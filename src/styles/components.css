@@ -351,18 +351,6 @@ select.field__control {
   line-height: 1.6;
 }
 
-.form-success {
-  display: flex;
-  gap: 0.85rem;
-  align-items: flex-start;
-  padding: 1.1rem 1.25rem;
-  border-radius: var(--r-md);
-  background: var(--sky-08);
-  border: 1px solid var(--sky-14);
-  color: var(--ocean);
-  font-size: var(--fs-sm);
-}
-
 /* ---------------- Accordion ---------------- */
 .accordion {
   border-top: 1px solid var(--line);

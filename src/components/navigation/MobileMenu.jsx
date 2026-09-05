@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import useDialogFocus from '@/hooks/useDialogFocus';
+import { useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Button from '@/components/buttons/Button';
@@ -8,25 +9,25 @@ import { COMPANY } from '@/constants/company';
 
 /** Full-screen navigation for tablet and below. */
 export default function MobileMenu({ onClose, onQuote }) {
-  // Lock the page behind the overlay while it is open.
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, []);
+  const dialogRef = useRef(null);
+  useDialogFocus(dialogRef, true, onClose);
 
   const links = [...NAV_LINKS, ...SERVICE_LINKS.map((s) => ({ label: s.label, to: s.to, nested: true }))];
 
   return (
     <motion.nav
+      ref={dialogRef}
+      id="mobile-navigation"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Navigation menu"
       className="mobile-menu"
       initial={{ opacity: 0, y: -14 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -14 }}
       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
     >
+      <button className="mobile-menu__close" onClick={onClose} aria-label="Close navigation menu"><Icon name="close" size={22} /></button>
       {links.map((link, i) => (
         <NavLink
           key={link.to + link.label}

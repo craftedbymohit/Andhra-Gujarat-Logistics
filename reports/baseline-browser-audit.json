@@ -1,0 +1,72 @@
+{
+  "mode": "baseline",
+  "measurements": [
+    {
+      "lcp": 2500,
+      "cls": 0.0005191038699470593,
+      "longTasks": 241,
+      "fcp": 1912,
+      "resources": 72280753,
+      "loader": false,
+      "overflow": false,
+      "device": "desktop",
+      "run": 1
+    },
+    {
+      "lcp": 788,
+      "cls": 0.0005480511114594051,
+      "longTasks": 131,
+      "fcp": 400,
+      "resources": 72280753,
+      "loader": false,
+      "overflow": false,
+      "device": "desktop",
+      "run": 2
+    },
+    {
+      "lcp": 776,
+      "cls": 0.004861466329022527,
+      "longTasks": 98,
+      "fcp": 384,
+      "resources": 72280753,
+      "loader": false,
+      "overflow": false,
+      "device": "desktop",
+      "run": 3
+    },
+    {
+      "lcp": 5104,
+      "cls": 0,
+      "longTasks": 1062,
+      "fcp": 4684,
+      "resources": 1039764,
+      "loader": false,
+      "overflow": false,
+      "device": "mobile",
+      "run": 1
+    },
+    {
+      "lcp": 6276,
+      "cls": 0,
+      "longTasks": 2219,
+      "fcp": 5756,
+      "resources": 1039764,
+      "loader": false,
+      "overflow": false,
+      "device": "mobile",
+      "run": 2
+    },
+    {
+      "lcp": 4896,
+      "cls": 0.0011270925374311977,
+      "longTasks": 1009,
+      "fcp": 4668,
+      "resources": 1039764,
+      "loader": false,
+      "overflow": false,
+      "device": "mobile",
+      "run": 3
+    }
+  ],
+  "checks": []
+}

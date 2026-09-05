@@ -1,5 +1,6 @@
+import { COMPANY } from '@/constants/company';
 import FormField from './FormField';
-import FormSuccess from './FormSuccess';
+import EnquiryDraft from './EnquiryDraft';
 import Button from '@/components/buttons/Button';
 
 import useForm from '@/hooks/useForm';
@@ -20,23 +21,13 @@ const SUBJECTS = [
 
 /** Quick inquiry form on the Contact page. */
 export default function ContactForm() {
-  const { values, errors, status, handleChange, handleSubmit } = useForm({
+  const { values, errors, status, handleChange, handleSubmit, edit } = useForm({
     initial: INITIAL,
     required: REQUIRED,
-    // TODO: connect to the client's mail service or CRM endpoint.
-    onSubmit: async (data) => {
-      console.info('Contact enquiry', data);
-      await new Promise((r) => setTimeout(r, 700));
-    },
   });
 
-  if (status === 'success') {
-    return (
-      <FormSuccess>
-        <strong>Thank you — your message has reached us.</strong> Our team responds within one working day.
-        For anything urgent, the 24×7 control tower is the fastest route.
-      </FormSuccess>
-    );
+  if (status === 'ready') {
+    return <EnquiryDraft values={values} subject="AGL contact enquiry" email={COMPANY.email} onEdit={edit} />;
   }
 
   return (
@@ -100,11 +91,12 @@ export default function ContactForm() {
         required
       />
 
-      <Button type="submit" disabled={status === 'submitting'} showIcon={status !== 'submitting'}>
-        {status === 'submitting' ? 'Sending…' : 'Send Message'}
+      <Button type="submit">
+        Prepare enquiry email
       </Button>
 
       <p className="form-note">
+        This form prepares an email draft for you to send.
         We use your details only to respond to this enquiry. They are never shared with third parties.
       </p>
     </form>

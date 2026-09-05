@@ -1,5 +1,5 @@
 import FormField from './FormField';
-import FormSuccess from './FormSuccess';
+import EnquiryDraft from './EnquiryDraft';
 import Button from '@/components/buttons/Button';
 
 import useForm from '@/hooks/useForm';
@@ -10,23 +10,13 @@ const INITIAL = { name: '', email: '', phone: '', role: '', location: '', experi
 const REQUIRED = ['name', 'email', 'phone', 'role'];
 
 export default function ApplicationForm() {
-  const { values, errors, status, handleChange, handleSubmit } = useForm({
+  const { values, errors, status, handleChange, handleSubmit, edit } = useForm({
     initial: INITIAL,
     required: REQUIRED,
-    // TODO: connect to the client's recruitment inbox or ATS.
-    onSubmit: async (data) => {
-      console.info('Job application', data);
-      await new Promise((r) => setTimeout(r, 700));
-    },
   });
 
-  if (status === 'success') {
-    return (
-      <FormSuccess>
-        <strong>Application received.</strong> Our HR team reviews every application within five working
-        days. Please email your CV to {COMPANY.careersEmail} quoting the role you applied for.
-      </FormSuccess>
-    );
+  if (status === 'ready') {
+    return <EnquiryDraft values={values} subject="AGL general application" email={COMPANY.careersEmail} onEdit={edit} application />;
   }
 
   return (
@@ -92,11 +82,12 @@ export default function ApplicationForm() {
         onChange={handleChange}
       />
 
-      <Button type="submit" disabled={status === 'submitting'} showIcon={status !== 'submitting'}>
-        {status === 'submitting' ? 'Submitting…' : 'Submit Application'}
+      <Button type="submit">
+        Prepare application email
       </Button>
 
       <p className="form-note">
+        This form prepares an email draft for you to send.
         Email your CV to <a href={`mailto:${COMPANY.careersEmail}`}>{COMPANY.careersEmail}</a> with the role
         in the subject line. We review every application received.
       </p>

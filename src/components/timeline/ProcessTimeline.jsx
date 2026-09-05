@@ -1,9 +1,8 @@
-import { useLayoutEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
+import { motion, useScroll, useReducedMotion } from 'framer-motion';
 import { PROCESS_STEPS } from '@/data/services';
 
-gsap.registerPlugin(ScrollTrigger);
+
 
 /**
  * Compact tree-like seven-stage operating model.
@@ -11,33 +10,9 @@ gsap.registerPlugin(ScrollTrigger);
  */
 export default function ProcessTimeline({ steps = PROCESS_STEPS }) {
   const root = useRef(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: root, offset: ['start 72%', 'end 72%'] });
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-      gsap.fromTo(
-        '.process__rail-fill',
-        { scaleY: 0 },
-        {
-          scaleY: 1,
-          ease: 'none',
-          scrollTrigger: { trigger: root.current, start: 'top 72%', end: 'bottom 72%', scrub: 0.6 },
-        }
-      );
-
-      gsap.from('.process__step', {
-        y: 26,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.09,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: root.current, start: 'top 76%' },
-      });
-    }, root);
-
-    return () => ctx.revert();
-  }, []);
 
   return (
     <div className="process" ref={root}>
@@ -54,7 +29,7 @@ export default function ProcessTimeline({ steps = PROCESS_STEPS }) {
 
       <div className="process__tree">
         <div className="process__rail" aria-hidden="true">
-          <div className="process__rail-fill" />
+          <motion.div className="process__rail-fill" style={{ scaleY: reduced ? 1 : scrollYProgress }} />
         </div>
 
         <div className="process__track">

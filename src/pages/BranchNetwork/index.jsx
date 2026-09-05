@@ -155,10 +155,10 @@ export default function BranchNetwork() {
         <SectionHeading
           eyebrow="Live Network View"
           title="A network built around the work."
-          lead="Filter by region, then hover or tap any node to see the branch manager, the belt it serves and the corridors it feeds."
+          lead="Filter by region, then click or tap any node to see the branch manager, the belt it serves and the corridors it feeds."
         />
         <div className="branch-network-map__frame">
-          <BranchLocator initialId={initialId} />
+          <BranchLocator key={initialId} initialId={initialId} />
         </div>
       </Section>
 
@@ -166,7 +166,7 @@ export default function BranchNetwork() {
         <SectionHeading
           eyebrow="Branch Directory"
           title="Choose a location. Get the whole picture."
-          lead="Every location has a local manager, direct contacts and a defined industrial catchment. Open one branch at a time to see its operating details."
+          lead="Every location has a local manager, direct contacts and a defined industrial catchment. Open a branch to see its operating details."
         />
 
         <div className="branch-directory__overview">

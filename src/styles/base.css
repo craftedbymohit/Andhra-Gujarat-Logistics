@@ -26,14 +26,8 @@ body {
   overflow-x: hidden;
 }
 
-/* Lenis drives scrolling with transforms; it needs the native smooth scroll off. */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
+/* Keep anchored content clear of the sticky header. */
+[id] { scroll-margin-top: calc(var(--header-h) + 24px); }
 
 h1,
 h2,

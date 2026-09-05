@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import PageHero from '@/components/hero/PageHero';
@@ -176,10 +177,10 @@ export default function Contact() {
           eyebrow="Regional Offices"
           title="Key branch contacts."
           aside={
-            <a href="/branch-network" className="link-arrow">
+            <Link to="/branch-network" className="link-arrow">
               View all {BRANCHES.length} branches
               <Icon name="arrowRight" size={15} />
-            </a>
+            </Link>
           }
         />
 

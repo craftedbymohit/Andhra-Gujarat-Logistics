@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import useDialogFocus from '@/hooks/useDialogFocus';
+import { useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import QuoteForm from '@/components/forms/QuoteForm';
 import Icon from '@/components/shared/Icon';
@@ -7,18 +8,8 @@ import { useQuote } from '@/app/QuoteContext';
 export default function QuoteModal() {
   const { isOpen, closeQuote } = useQuote();
 
-  // Escape closes; the page behind stays put while the modal is open.
-  useEffect(() => {
-    if (!isOpen) return undefined;
-    const onKey = (e) => e.key === 'Escape' && closeQuote();
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', onKey);
-    return () => {
-      document.body.style.overflow = prev;
-      window.removeEventListener('keydown', onKey);
-    };
-  }, [isOpen, closeQuote]);
+  const dialogRef = useRef(null);
+  useDialogFocus(dialogRef, isOpen, closeQuote);
 
   return (
     <AnimatePresence>
@@ -32,6 +23,7 @@ export default function QuoteModal() {
           transition={{ duration: 0.22 }}
         >
           <motion.div
+            ref={dialogRef}
             className="modal"
             role="dialog"
             aria-modal="true"

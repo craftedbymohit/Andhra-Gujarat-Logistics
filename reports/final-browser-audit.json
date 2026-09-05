@@ -1,0 +1,73 @@
+{
+  "mode": "final",
+  "compression": "none",
+  "measurements": [
+    {
+      "lcp": 684,
+      "cls": 0,
+      "longTasks": 93,
+      "fcp": 684,
+      "resources": 4124941,
+      "loader": false,
+      "overflow": false,
+      "device": "desktop",
+      "run": 1
+    },
+    {
+      "lcp": 212,
+      "cls": 8.889022010834619e-05,
+      "longTasks": 33,
+      "fcp": 192,
+      "resources": 795759,
+      "loader": false,
+      "overflow": false,
+      "device": "desktop",
+      "run": 2
+    },
+    {
+      "lcp": 204,
+      "cls": 0,
+      "longTasks": 25,
+      "fcp": 204,
+      "resources": 795759,
+      "loader": false,
+      "overflow": false,
+      "device": "desktop",
+      "run": 3
+    },
+    {
+      "lcp": 4324,
+      "cls": 0,
+      "longTasks": 484,
+      "fcp": 4144,
+      "resources": 1662006,
+      "loader": false,
+      "overflow": false,
+      "device": "mobile",
+      "run": 1
+    },
+    {
+      "lcp": 4324,
+      "cls": 0,
+      "longTasks": 436,
+      "fcp": 4144,
+      "resources": 1662006,
+      "loader": false,
+      "overflow": false,
+      "device": "mobile",
+      "run": 2
+    },
+    {
+      "lcp": 4436,
+      "cls": 0,
+      "longTasks": 517,
+      "fcp": 4208,
+      "resources": 1662006,
+      "loader": false,
+      "overflow": false,
+      "device": "mobile",
+      "run": 3
+    }
+  ],
+  "checks": []
+}

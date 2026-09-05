@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { MotionConfig } from 'framer-motion';
 import { RouterProvider } from 'react-router-dom';
 import { router } from '@/routes';
 import { QuoteProvider } from '@/app/QuoteContext';
@@ -77,9 +78,11 @@ export default function App() {
   }, [showActionLoader]);
 
   return (
+    <MotionConfig reducedMotion="user">
     <QuoteProvider>
-      <RouterProvider router={router} future={{ v7_startTransition: true }} />
+      <RouterProvider router={router} />
       {(isStarting || isActionLoading) && <PageLoader isExiting={isLoaderExiting} />}
     </QuoteProvider>
+    </MotionConfig>
   );
 }

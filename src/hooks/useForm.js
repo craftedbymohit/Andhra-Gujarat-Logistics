@@ -3,60 +3,30 @@ import { useCallback, useState } from 'react';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_RE = /^[+\d][\d\s-]{7,16}$/;
 
-/**
- * Minimal controlled-form helper: values, validation and a submit lifecycle.
- *
- * `onSubmit` receives the validated values. Wire it to the client's CRM,
- * mail service or form endpoint — the default just resolves so the UI works
- * end to end during development.
- */
-export default function useForm({ initial, required = [], onSubmit }) {
+/** Validate locally and prepare a draft; delivery happens in the visitor's email app. */
+export default function useForm({ initial, required = [] }) {
   const [values, setValues] = useState(initial);
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState('idle'); // idle | submitting | success | error
-
-  const handleChange = useCallback((e) => {
-    const { name, value } = e.target;
-    setValues((v) => ({ ...v, [name]: value }));
-    setErrors((prev) => (prev[name] ? { ...prev, [name]: undefined } : prev));
+  const [status, setStatus] = useState('idle');
+  const handleChange = useCallback(({ target: { name, value } }) => {
+    setValues(previous => ({ ...previous, [name]: value }));
+    setErrors(previous => ({ ...previous, [name]: undefined }));
   }, []);
-
-  const validate = useCallback(() => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     const next = {};
-
-    required.forEach((name) => {
+    required.forEach(name => {
       if (!String(values[name] ?? '').trim()) next[name] = 'This field is required';
     });
-
-    if (values.email && !EMAIL_RE.test(values.email)) next.email = 'Enter a valid email address';
-    if (values.phone && !PHONE_RE.test(values.phone)) next.phone = 'Enter a valid contact number';
-
+    if (values.email && !EMAIL_RE.test(values.email.trim())) next.email = 'Enter a valid email address';
+    if (values.phone && !PHONE_RE.test(values.phone.trim())) next.phone = 'Enter a valid contact number';
     setErrors(next);
-    return Object.keys(next).length === 0;
-  }, [required, values]);
-
-  const handleSubmit = useCallback(
-    async (e) => {
-      e.preventDefault();
-      if (!validate()) return;
-
-      setStatus('submitting');
-      try {
-        await (onSubmit ? onSubmit(values) : Promise.resolve());
-        setStatus('success');
-        setValues(initial);
-      } catch {
-        setStatus('error');
-      }
-    },
-    [initial, onSubmit, validate, values]
-  );
-
-  const reset = useCallback(() => {
-    setValues(initial);
-    setErrors({});
-    setStatus('idle');
-  }, [initial]);
-
-  return { values, errors, status, handleChange, handleSubmit, reset };
+    if (Object.keys(next).length) {
+      event.currentTarget.elements.namedItem(Object.keys(next)[0])?.focus();
+      return;
+    }
+    setStatus('ready');
+  };
+  const edit = useCallback(() => setStatus('idle'), []);
+  return { values, errors, status, handleChange, handleSubmit, edit };
 }

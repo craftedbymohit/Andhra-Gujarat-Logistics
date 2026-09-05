@@ -46,7 +46,7 @@ export default function Home() {
           <Reveal delay={0.1} className="branch-presence__support">
             <p className="lead">
               Our network across Gujarat, Andhra Pradesh, Telangana and Karnataka is built around the industrial corridors we
-              serve — combining dependable capacity, responsive coordination and one consistent operating standard
+              serve combining dependable capacity, responsive coordination and one consistent operating standard
               from pickup to delivery.
             </p>
             <div className="row" style={{ gap: '2.5rem', marginTop: '1.75rem' }}>
@@ -133,7 +133,7 @@ export default function Home() {
         <SectionHeading
           eyebrow="The Logistics Journey"
           title="Seven stages. One reference number."
-          lead="From the first enquiry to the digitised proof of delivery, every consignment follows the same documented path — at every branch, identically."
+          lead="From the first enquiry to the digitised proof of delivery, every consignment follows the same documented path at every branch, identically."
         />
         <ProcessTimeline />
       </Section>

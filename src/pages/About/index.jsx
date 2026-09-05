@@ -60,7 +60,7 @@ export default function About() {
             <span className="eyebrow">Our Story</span>
             <h2>Two cities. One promise.</h2>
             <p className="lead">
-              A logistics company built where industry works — close to the gates, the people and the pressure of
+              A logistics company built where industry works close to the gates, the people and the pressure of
               every delivery date.
             </p>
           </Reveal>
@@ -71,7 +71,7 @@ export default function About() {
             </p>
             <p>
               From those two industrial centres, the network has grown to nine locations across Gujarat, Andhra
-              Pradesh, Telangana and Karnataka — with one operating standard carried through every consignment.
+              Pradesh, Telangana and Karnataka with one operating standard carried through every consignment.
             </p>
             <div className="story-tags" aria-label="Story principles">
               <span>Built close to industry</span>
@@ -96,10 +96,14 @@ export default function About() {
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               >
                 {currentDirector.image ? (
-                  <img src={currentDirector.image} alt={currentDirector.name} />
+                  <img decoding="async" loading="lazy" src={currentDirector.image} alt={currentDirector.name} />
                 ) : (
                   <span className="chairman__initials">{currentDirector.initials}</span>
                 )}
+                <div className="chairman__portrait-label">
+                  <strong>{currentDirector.name}</strong>
+                  <span>{currentDirector.role}</span>
+                </div>
               </motion.div>
             </AnimatePresence>
           </Reveal>

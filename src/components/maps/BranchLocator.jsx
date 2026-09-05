@@ -94,6 +94,7 @@ export default function BranchLocator({ initialId = 'ankleshwar', showRegions = 
               key={r}
               className="branch-tab"
               data-active={region === r}
+              aria-pressed={region === r}
               onClick={() => setRegion(r)}
             >
               {r}
@@ -108,9 +109,9 @@ export default function BranchLocator({ initialId = 'ankleshwar', showRegions = 
       <div className="map-layout">
         <div>
           <div className="map-stage">
-            <div className="map-visual" role="img" aria-label="Outline map of India">
-              <img className="map-base map-base--glow" src={indiaOutlineMap} alt="" aria-hidden="true" />
-              <img className="map-base" src={indiaOutlineMap} alt="Outline map of India" />
+            <div className="map-visual" role="group" aria-label="Select a branch on the map of India">
+              <img decoding="async" loading="lazy" className="map-base map-base--glow" src={indiaOutlineMap} alt="" aria-hidden="true" />
+              <img decoding="async" loading="lazy" className="map-base" src={indiaOutlineMap} alt="Outline map of India" />
               <svg className="map-connectors" viewBox="0 0 100 100" aria-hidden="true">
                 {mapBranches.map((branch) => {
                   const connector = getConnector(branch);
@@ -138,6 +139,7 @@ export default function BranchLocator({ initialId = 'ankleshwar', showRegions = 
                   style={getPinPosition(branch)}
                   onClick={() => setActiveId(branch.id)}
                   aria-label={`Show ${branch.city}, ${branch.state}`}
+                  aria-pressed={active?.id === branch.id}
                 >
                   <Icon name="pin" size={15} />
                 </button>

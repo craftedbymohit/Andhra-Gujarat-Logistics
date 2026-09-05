@@ -1,2 +1,22 @@
-# SPA fallback — without this, refreshing /branch-network returns a 404.
-/*  /index.html  200
+/ /index.html 200
+/about /index.html 200
+/about/ /index.html 200
+/services /index.html 200
+/services/ /index.html 200
+/services/road-freight /index.html 200
+/services/road-freight/ /index.html 200
+/services/project-cargo /index.html 200
+/services/project-cargo/ /index.html 200
+/services/customized-solutions /index.html 200
+/services/customized-solutions/ /index.html 200
+/branch-network /index.html 200
+/branch-network/ /index.html 200
+/industries /index.html 200
+/industries/ /index.html 200
+/careers /index.html 200
+/careers/ /index.html 200
+/contact /index.html 200
+/contact/ /index.html 200
+/social-coming-soon /index.html 200
+/social-coming-soon/ /index.html 200
+/* /404.html 404

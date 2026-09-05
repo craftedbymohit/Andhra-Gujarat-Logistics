@@ -2,9 +2,13 @@ import { useEffect } from 'react';
 import { COMPANY } from '@/constants/company';
 
 /** Sets the document title and meta description per route. */
-export default function usePageMeta(title, description) {
+export default function usePageMeta(title, description, noindex = false) {
   useEffect(() => {
     document.title = title ? `${title} | ${COMPANY.name}` : COMPANY.name;
+    const robots = document.createElement('meta');
+    robots.name = 'robots';
+    robots.content = noindex ? 'noindex, follow' : 'index, follow';
+    document.head.appendChild(robots);
 
     if (description) {
       let tag = document.querySelector('meta[name="description"]');
@@ -15,5 +19,6 @@ export default function usePageMeta(title, description) {
       }
       tag.setAttribute('content', description);
     }
-  }, [title, description]);
+    return () => robots.remove();
+  }, [title, description, noindex]);
 }

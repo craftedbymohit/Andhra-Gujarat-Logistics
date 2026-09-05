@@ -1,6 +1,5 @@
 import PageHero from '@/components/hero/PageHero';
 import { Section } from '@/components/shared/Section';
-import SectionHeading from '@/components/sections/SectionHeading';
 import FeatureCard from '@/components/cards/FeatureCard';
 import Button from '@/components/buttons/Button';
 import ApplicationForm from '@/components/forms/ApplicationForm';

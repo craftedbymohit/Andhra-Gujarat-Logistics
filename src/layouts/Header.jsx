@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Logo from '@/components/navigation/Logo';
@@ -16,6 +16,9 @@ export default function Header() {
   const [openPanel, setOpenPanel] = useState(null);
   const { openQuote } = useQuote();
 
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
+  useEffect(() => { setMenuOpen(false); setOpenPanel(null); }, [pathname]);
+
   const isActive = (to) => (to === '/' ? pathname === '/' : pathname.startsWith(to));
 
   return (
@@ -31,6 +34,9 @@ export default function Header() {
                 className="nav__item"
                 onMouseEnter={() => setOpenPanel(link.children ? link.to : null)}
                 onMouseLeave={() => setOpenPanel(null)}
+                onFocus={() => setOpenPanel(link.children ? link.to : null)}
+                onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setOpenPanel(null); }}
+                onKeyDown={(event) => { if (event.key === 'Escape') setOpenPanel(null); }}
               >
                 <Link to={link.to} className="nav__link" data-active={isActive(link.to)}>
                   {link.label}
@@ -54,7 +60,7 @@ export default function Header() {
                           style={{ '--card-index': index }}
                         >
                           <span className="nav__panel-media">
-                            <img src={child.image} alt="" />
+                            <img decoding="async" loading="lazy" src={child.image} alt="" />
                             <span className="nav__panel-icon">
                               <Icon name={child.icon} size={17} />
                             </span>
@@ -85,6 +91,7 @@ export default function Header() {
               onClick={() => setMenuOpen((v) => !v)}
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
+              aria-controls="mobile-navigation"
             >
               <span />
               <span />
@@ -95,7 +102,7 @@ export default function Header() {
       </header>
 
       <AnimatePresence>
-        {menuOpen && <MobileMenu onClose={() => setMenuOpen(false)} onQuote={openQuote} />}
+        {menuOpen && <MobileMenu onClose={closeMenu} onQuote={openQuote} />}
       </AnimatePresence>
     </>
   );

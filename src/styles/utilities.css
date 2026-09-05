@@ -110,12 +110,6 @@
   text-transform: uppercase;
   color: var(--ocean);
 }
-.eyebrow::before {
-  content: '';
-  width: 28px;
-  height: 1px;
-  background: var(--sky);
-}
 .section--dark .eyebrow {
   color: var(--ice);
 }

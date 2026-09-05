@@ -1,0 +1,73 @@
+{
+  "mode": "final",
+  "compression": "gzip",
+  "measurements": [
+    {
+      "lcp": 728,
+      "cls": 0,
+      "longTasks": 83,
+      "fcp": 728,
+      "resources": 3740131,
+      "loader": false,
+      "overflow": false,
+      "device": "desktop",
+      "run": 1
+    },
+    {
+      "lcp": 240,
+      "cls": 8.889022010834619e-05,
+      "longTasks": 39,
+      "fcp": 216,
+      "resources": 3740131,
+      "loader": false,
+      "overflow": false,
+      "device": "desktop",
+      "run": 2
+    },
+    {
+      "lcp": 228,
+      "cls": 8.889022010834619e-05,
+      "longTasks": 35,
+      "fcp": 200,
+      "resources": 3740131,
+      "loader": false,
+      "overflow": false,
+      "device": "desktop",
+      "run": 3
+    },
+    {
+      "lcp": 2492,
+      "cls": 0,
+      "longTasks": 361,
+      "fcp": 2100,
+      "resources": 1277196,
+      "loader": false,
+      "overflow": false,
+      "device": "mobile",
+      "run": 1
+    },
+    {
+      "lcp": 2452,
+      "cls": 0,
+      "longTasks": 590,
+      "fcp": 2328,
+      "resources": 1277196,
+      "loader": false,
+      "overflow": false,
+      "device": "mobile",
+      "run": 2
+    },
+    {
+      "lcp": 2432,
+      "cls": 0,
+      "longTasks": 363,
+      "fcp": 2120,
+      "resources": 1277196,
+      "loader": false,
+      "overflow": false,
+      "device": "mobile",
+      "run": 3
+    }
+  ],
+  "checks": []
+}

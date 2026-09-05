@@ -405,7 +405,7 @@
   letter-spacing: -0.02em;
   color: var(--ink);
 }
-.mobile-menu__link[data-active='true'] {
+.mobile-menu__link[aria-current='page'] {
   color: var(--ocean);
 }
 .mobile-menu__num {
@@ -599,3 +599,5 @@
     min-width: 0;
   }
 }
+
+.mobile-menu__close { position: absolute; top: calc(var(--header-h) + var(--announce-h) + 8px); right: var(--gutter); padding: 12px; z-index: 1; }

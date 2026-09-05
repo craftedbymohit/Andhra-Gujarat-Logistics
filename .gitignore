@@ -6,3 +6,7 @@ dist-ssr
 *.local
 .DS_Store
 .vite
+
+.tmp-tools/
+.audit/
+__pycache__/

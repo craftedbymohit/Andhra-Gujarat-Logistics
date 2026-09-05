@@ -8,7 +8,7 @@ export default function FleetShowcase({ items = FLEET }) {
       {items.map((v, i) => (
         <motion.article variants={revealItem} className="fleet-card" key={v.id}>
           <div className="fleet-card__media">
-            <img className="fleet-card__image" src={v.image} alt={v.name} loading="lazy" />
+            <img decoding="async" className="fleet-card__image" src={v.image} alt={v.name} loading="lazy" />
             <span className="fleet-card__index numeric">0{i + 1}</span>
             <span className="fleet-card__tag">Fleet format</span>
           </div>
