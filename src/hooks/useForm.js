@@ -13,6 +13,7 @@ const PHONE_RE = /^[+\d][\d\s-]{7,16}$/;
 export default function useForm({ initial, required = [], onSubmit }) {
   const [values, setValues] = useState(initial);
   const [errors, setErrors] = useState({});
+  const [submitError, setSubmitError] = useState('');
   const [status, setStatus] = useState('idle'); // idle | submitting | success | error
 
   const handleChange = useCallback((e) => {
@@ -41,11 +42,13 @@ export default function useForm({ initial, required = [], onSubmit }) {
       if (!validate()) return;
 
       setStatus('submitting');
+      setSubmitError('');
       try {
         await (onSubmit ? onSubmit(values) : Promise.resolve());
         setStatus('success');
         setValues(initial);
-      } catch {
+      } catch (error) {
+        setSubmitError(error?.message || 'Something went wrong. Please try again.');
         setStatus('error');
       }
     },
@@ -55,8 +58,15 @@ export default function useForm({ initial, required = [], onSubmit }) {
   const reset = useCallback(() => {
     setValues(initial);
     setErrors({});
+    setSubmitError('');
     setStatus('idle');
   }, [initial]);
 
-  return { values, errors, status, handleChange, handleSubmit, reset };
+  /** Return to the editable form after a failure, keeping what the user typed. */
+  const retry = useCallback(() => {
+    setSubmitError('');
+    setStatus('idle');
+  }, []);
+
+  return { values, errors, status, submitError, handleChange, handleSubmit, reset, retry };
 }
