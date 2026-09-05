@@ -27,10 +27,21 @@ export default function QuoteForm({ compact }) {
   const { values, errors, status, handleChange, handleSubmit } = useForm({
     initial: INITIAL,
     required: REQUIRED,
-    // TODO: point this at the client's CRM / form endpoint.
     onSubmit: async (data) => {
-      console.info('Quote request', data);
-      await new Promise((r) => setTimeout(r, 700));
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, formType: 'quote' }),
+      });
+
+      // A static host or a deploy without the serverless function will answer
+      // the SPA fallback (index.html) with a 200. Never treat a bare 200 as
+      // delivery — require the endpoint's explicit JSON acknowledgement.
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok || result?.ok !== true) {
+        throw new Error(result?.error || 'We could not send your request. Please call us instead.');
+      }
     },
   });
 
@@ -136,6 +147,12 @@ export default function QuoteForm({ compact }) {
       <Button type="submit" disabled={status === 'submitting'} showIcon={status !== 'submitting'}>
         {status === 'submitting' ? 'Sending…' : 'Request a Quote'}
       </Button>
+
+      {status === 'error' && (
+        <p className="form-note" role="alert">
+          We could not send your request. Please try again or contact us directly.
+        </p>
+      )}
 
       <p className="form-note">
         We respond to quote requests within one working day. Your details are used only to prepare this

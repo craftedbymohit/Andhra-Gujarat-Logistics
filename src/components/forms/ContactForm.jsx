@@ -1,8 +1,10 @@
 import FormField from './FormField';
 import FormSuccess from './FormSuccess';
+import FormError from './FormError';
 import Button from '@/components/buttons/Button';
 
 import useForm from '@/hooks/useForm';
+import { COMPANY } from '@/constants/company';
 
 const INITIAL = { name: '', company: '', email: '', phone: '', subject: '', message: '' };
 const REQUIRED = ['name', 'email', 'phone', 'message'];
@@ -20,15 +22,36 @@ const SUBJECTS = [
 
 /** Quick inquiry form on the Contact page. */
 export default function ContactForm() {
-  const { values, errors, status, handleChange, handleSubmit } = useForm({
+  const { values, errors, status, submitError, handleChange, handleSubmit, retry } = useForm({
     initial: INITIAL,
     required: REQUIRED,
-    // TODO: connect to the client's mail service or CRM endpoint.
     onSubmit: async (data) => {
-      console.info('Contact enquiry', data);
-      await new Promise((r) => setTimeout(r, 700));
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      // A static host or a deploy without the serverless function will answer
+      // the SPA fallback (index.html) with a 200. Never treat a bare 200 as
+      // delivery — require the endpoint's explicit JSON acknowledgement.
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok || result?.ok !== true) {
+        throw new Error(result?.error || 'We could not send your enquiry. Please call us instead.');
+      }
     },
   });
+
+  if (status === 'error') {
+    return (
+      <FormError onRetry={retry}>
+        <strong>Your message could not be sent.</strong> {submitError} You can reach the 24×7 control
+        tower on <a href={`tel:${COMPANY.emergency}`}>{COMPANY.emergency}</a> or email{' '}
+        <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>.
+      </FormError>
+    );
+  }
 
   if (status === 'success') {
     return (
@@ -103,6 +126,12 @@ export default function ContactForm() {
       <Button type="submit" disabled={status === 'submitting'} showIcon={status !== 'submitting'}>
         {status === 'submitting' ? 'Sending…' : 'Send Message'}
       </Button>
+
+      {status === 'error' && (
+        <p className="form-note" role="alert">
+          We could not send your message. Please try again or contact us directly.
+        </p>
+      )}
 
       <p className="form-note">
         We use your details only to respond to this enquiry. They are never shared with third parties.
