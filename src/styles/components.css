@@ -386,6 +386,21 @@ select.field__control {
   cursor: pointer;
 }
 
+@media (max-width: 640px) {
+  .btn,
+  .btn--lg {
+    min-height: 3rem;
+  }
+  .form-success,
+  .form-error {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .form-error__retry {
+    align-self: auto;
+  }
+}
+
 /* ---------------- Accordion ---------------- */
 .accordion {
   border-top: 1px solid var(--line);

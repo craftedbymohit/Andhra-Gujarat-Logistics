@@ -1,43 +1,37 @@
 import { useEffect, useRef, useState } from 'react';
-import heroVideo from '../../../assets/agl_hero_vid.mp4';
 import Button from '@/components/buttons/Button';
 import { useQuote } from '@/app/QuoteContext';
+
+// Hero video is served from Vercel Blob Storage to avoid bundling/streaming lag.
+const heroVideo = 'https://4jeqrtwamgulddtw.public.blob.vercel-storage.com/aglherovideo.mp4';
 
 export default function HomeHero() {
   const { openQuote } = useQuote();
   const videoRef = useRef(null);
   const manuallyPaused = useRef(false);
-  const [source, setSource] = useState();
+  const [source] = useState(heroVideo);
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const connection = navigator.connection;
-    const update = () => {
-      const constrained = connection?.saveData;
-      setSource(reduced.matches || constrained ? undefined : heroVideo);
+    const playVideo = () => {
+      if (!document.hidden && !manuallyPaused.current) video.play().catch(() => {});
     };
-    // Use the original client video on every screen size.
-    if (document.readyState === 'complete') update();
-    else window.addEventListener('load', update, { once: true });
-    reduced.addEventListener('change', update);
-    connection?.addEventListener('change', update);
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !document.hidden && video.currentSrc && !manuallyPaused.current) video.play().catch(() => {});
+      if (entry.isIntersecting) playVideo();
       else video.pause();
     });
     observer.observe(video);
     const visibility = () => {
       if (document.hidden) video.pause();
-      else if (video.getBoundingClientRect().bottom > 0 && video.currentSrc && !manuallyPaused.current) video.play().catch(() => {});
+      else if (video.getBoundingClientRect().bottom > 0) playVideo();
     };
     document.addEventListener('visibilitychange', visibility);
+    video.addEventListener('loadeddata', playVideo, { once: true });
+    playVideo();
     return () => {
-      window.removeEventListener('load', update);
-      reduced.removeEventListener('change', update);
-      connection?.removeEventListener('change', update);
       document.removeEventListener('visibilitychange', visibility);
+      video.removeEventListener('loadeddata', playVideo);
       observer.disconnect();
     };
   }, []);
@@ -52,7 +46,7 @@ export default function HomeHero() {
         loop
         muted
         playsInline
-        preload="metadata"
+        preload="auto"
         aria-hidden="true"
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
