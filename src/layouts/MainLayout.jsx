@@ -23,6 +23,17 @@ export default function MainLayout() {
   const isFirstRender = useRef(true);
   const hideTimerRef = useRef(null);
   const exitTimerRef = useRef(null);
+  const isNavigatingRef = useRef(false);
+
+  const beginLoaderExit = () => {
+    window.clearTimeout(hideTimerRef.current);
+    window.clearTimeout(exitTimerRef.current);
+    setIsLoaderExiting(true);
+    exitTimerRef.current = window.setTimeout(() => {
+      setIsRouteLoading(false);
+      setIsLoaderExiting(false);
+    }, LOADER_FADE_DURATION);
+  };
 
   useEffect(() => {
     // Skip the initial mount; App.jsx already shows the startup loader.
@@ -38,11 +49,7 @@ export default function MainLayout() {
     setIsLoaderExiting(false);
 
     hideTimerRef.current = window.setTimeout(() => {
-      setIsLoaderExiting(true);
-      exitTimerRef.current = window.setTimeout(() => {
-        setIsRouteLoading(false);
-        setIsLoaderExiting(false);
-      }, LOADER_FADE_DURATION);
+      if (!isNavigatingRef.current) beginLoaderExit();
     }, ROUTE_LOADER_DURATION);
 
     return () => {
@@ -53,6 +60,11 @@ export default function MainLayout() {
 
   // Also cover slow async navigations (data loaders / lazy chunks not yet cached).
   const isNavigating = navigation.state !== 'idle';
+  isNavigatingRef.current = isNavigating;
+
+  useEffect(() => {
+    if (!isNavigating && isRouteLoading && !isLoaderExiting) beginLoaderExit();
+  }, [isNavigating, isLoaderExiting, isRouteLoading]);
 
   return (
     <>

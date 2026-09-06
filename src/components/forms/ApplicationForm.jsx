@@ -10,13 +10,13 @@ const INITIAL = { name: '', email: '', phone: '', role: '', location: '', experi
 const REQUIRED = ['name', 'email', 'phone', 'role'];
 
 export default function ApplicationForm() {
-  const { values, errors, status, handleChange, handleSubmit, edit } = useForm({
+  const { values, errors, status, handleChange, handleSubmit, retry } = useForm({
     initial: INITIAL,
     required: REQUIRED,
   });
 
-  if (status === 'ready') {
-    return <EnquiryDraft values={values} subject="AGL general application" email={COMPANY.careersEmail} onEdit={edit} application />;
+  if (status === 'success') {
+    return <EnquiryDraft values={values} subject="AGL general application" email={COMPANY.careersEmail} onEdit={retry} application />;
   }
 
   return (
