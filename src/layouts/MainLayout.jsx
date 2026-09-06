@@ -9,7 +9,7 @@ import FloatingActions from '@/components/shared/FloatingActions';
 import QuoteModal from '@/components/modals/QuoteModal';
 import PageLoader from '@/components/loaders/PageLoader';
 
-const ROUTE_LOADER_DURATION = 900;
+const ROUTE_LOADER_DURATION = 1500;
 const LOADER_FADE_DURATION = 320;
 
 /** Persistent chrome + animated route transition. */
@@ -24,6 +24,7 @@ export default function MainLayout() {
   const hideTimerRef = useRef(null);
   const exitTimerRef = useRef(null);
   const isNavigatingRef = useRef(false);
+  const routeTimerElapsedRef = useRef(false);
 
   const beginLoaderExit = () => {
     window.clearTimeout(hideTimerRef.current);
@@ -45,10 +46,12 @@ export default function MainLayout() {
     window.clearTimeout(hideTimerRef.current);
     window.clearTimeout(exitTimerRef.current);
 
+    routeTimerElapsedRef.current = false;
     setIsRouteLoading(true);
     setIsLoaderExiting(false);
 
     hideTimerRef.current = window.setTimeout(() => {
+      routeTimerElapsedRef.current = true;
       if (!isNavigatingRef.current) beginLoaderExit();
     }, ROUTE_LOADER_DURATION);
 
@@ -63,7 +66,9 @@ export default function MainLayout() {
   isNavigatingRef.current = isNavigating;
 
   useEffect(() => {
-    if (!isNavigating && isRouteLoading && !isLoaderExiting) beginLoaderExit();
+    if (!isNavigating && routeTimerElapsedRef.current && isRouteLoading && !isLoaderExiting) {
+      beginLoaderExit();
+    }
   }, [isNavigating, isLoaderExiting, isRouteLoading]);
 
   return (

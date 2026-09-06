@@ -11,6 +11,15 @@ export default function HomeHero() {
   const manuallyPaused = useRef(false);
   const [source] = useState(heroVideo);
   const [playing, setPlaying] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 760px)');
+    const syncMobileState = () => setIsMobile(media.matches);
+    syncMobileState();
+    media.addEventListener?.('change', syncMobileState);
+    return () => media.removeEventListener?.('change', syncMobileState);
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -77,7 +86,7 @@ export default function HomeHero() {
           </Button>
         </div>
       </div>
-      {source && <button className="hero__playback" type="button" onClick={() => {
+      {source && !isMobile && <button className="hero__playback" type="button" onClick={() => {
         manuallyPaused.current = playing;
         if (playing) videoRef.current.pause();
         else videoRef.current.play().catch(() => {});

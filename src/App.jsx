@@ -6,6 +6,7 @@ import { QuoteProvider } from '@/app/QuoteContext';
 import PageLoader from '@/components/loaders/PageLoader';
 
 const INITIAL_LOADER_DURATION = 1500;
+const MOBILE_LOADER_DURATION = 1500;
 const LOADER_FADE_DURATION = 320;
 
 export default function App() {
@@ -14,13 +15,16 @@ export default function App() {
   const initialExitTimerRef = useRef(null);
 
   useEffect(() => {
+    const duration = window.matchMedia('(max-width: 760px)').matches
+      ? MOBILE_LOADER_DURATION
+      : INITIAL_LOADER_DURATION;
     const timer = window.setTimeout(() => {
       setIsLoaderExiting(true);
       initialExitTimerRef.current = window.setTimeout(() => {
         setIsStarting(false);
         setIsLoaderExiting(false);
       }, LOADER_FADE_DURATION);
-    }, INITIAL_LOADER_DURATION);
+    }, duration);
 
     return () => {
       window.clearTimeout(timer);

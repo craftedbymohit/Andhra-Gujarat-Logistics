@@ -101,7 +101,7 @@ export default function About() {
                   <span className="chairman__initials">{currentDirector.initials}</span>
                 )}
                 <div className="chairman__portrait-label">
-                  <strong>{currentDirector.name}</strong>
+                  <strong>MR. {currentDirector.name}</strong>
                   <span>{currentDirector.role}</span>
                 </div>
               </motion.div>
