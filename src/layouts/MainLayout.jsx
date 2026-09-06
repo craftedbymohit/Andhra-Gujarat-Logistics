@@ -15,6 +15,7 @@ const LOADER_FADE_DURATION = 320;
 /** Persistent chrome + animated route transition. */
 export default function MainLayout() {
   const navigation = useNavigation();
+  const { pathname } = useLocation();
 
   // Show the branded loader on every real page (pathname) change.
   const [isRouteLoading, setIsRouteLoading] = useState(false);
