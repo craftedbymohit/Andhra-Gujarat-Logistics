@@ -77,6 +77,16 @@
   --announce-h: 40px;
 }
 
+@media (max-width: 640px) {
+  :root {
+    --gutter: 1rem;
+    --section-y: 3.75rem;
+    --stack: 1.5rem;
+    --header-h: 68px;
+    --announce-h: 36px;
+  }
+}
+
 /* Respect users who ask the OS to reduce motion. */
 @media (prefers-reduced-motion: reduce) {
   :root {

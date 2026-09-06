@@ -98,6 +98,13 @@
   flex-wrap: wrap;
 }
 
+@media (max-width: 640px) {
+  .row > .btn,
+  .row > .btn--lg {
+    width: 100%;
+  }
+}
+
 /* ---- Type helpers ---- */
 .eyebrow {
   display: inline-flex;

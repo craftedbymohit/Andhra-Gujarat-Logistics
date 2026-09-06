@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Logo from '@/components/navigation/Logo';
@@ -14,6 +14,7 @@ export default function Header() {
   const scrolled = useScrolled(20);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openPanel, setOpenPanel] = useState(null);
+  const navTriggerRefs = useRef(new Map());
   const { openQuote } = useQuote();
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
@@ -36,9 +37,22 @@ export default function Header() {
                 onMouseLeave={() => setOpenPanel(null)}
                 onFocus={() => setOpenPanel(link.children ? link.to : null)}
                 onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setOpenPanel(null); }}
-                onKeyDown={(event) => { if (event.key === 'Escape') setOpenPanel(null); }}
+                onKeyDown={(event) => {
+                  if (event.key === 'Escape') {
+                    setOpenPanel(null);
+                    requestAnimationFrame(() => navTriggerRefs.current.get(link.to)?.focus());
+                  }
+                }}
               >
-                <Link to={link.to} className="nav__link" data-active={isActive(link.to)}>
+                <Link
+                  ref={(node) => {
+                    if (node) navTriggerRefs.current.set(link.to, node);
+                    else navTriggerRefs.current.delete(link.to);
+                  }}
+                  to={link.to}
+                  className="nav__link"
+                  data-active={isActive(link.to)}
+                >
                   {link.label}
                   {link.children && <Icon name="chevronDown" size={13} className="nav__chev" />}
                 </Link>
